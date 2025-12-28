@@ -173,7 +173,7 @@ export default function Home() {
           {/* Search */}
           <form onSubmit={handleResolve} className="flex gap-2 max-w-xl mx-auto">
             <Input
-              placeholder="Enter a domain (e.g., example-restaurant.com)"
+              placeholder="Enter a domain (e.g., dockai.co)"
               value={domain}
               onChange={(e) => setDomain(e.target.value)}
               className="bg-zinc-900 border-zinc-700 text-white placeholder:text-zinc-500"

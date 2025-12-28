@@ -1,0 +1,11 @@
+{
+  "schema_version": "0.1.0",
+  "domain": "dockai.co",
+  "mcps": [
+    {
+      "provider": "emailme",
+      "endpoint": "https://emailme.dockai.co",
+      "capabilities": ["contact"]
+    }
+  ]
+}
