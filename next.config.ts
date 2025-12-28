@@ -1,7 +1,15 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
+  async redirects() {
+    return [
+      {
+        source: '/protocol',
+        destination: 'https://github.com/edp-protocol/entity-discovery-protocol',
+        permanent: false,
+      },
+    ]
+  },
 };
 
 export default nextConfig;
