@@ -1,9 +1,58 @@
-import Link from 'next/link'
+'use client'
 
-export const metadata = {
-  title: 'For Providers - Dock AI',
-  description: 'Register your MCP server and bulk-register entities in the Dock AI registry.',
-}
+import Link from 'next/link'
+import { CodeBlock } from '@/components/ui/code-block'
+
+const endpointExample = `POST https://api.dockai.co/v1/providers/register
+Authorization: Bearer sk_live_xxxxxxxxxxxxx`
+
+const requestExample = `{
+  "sync_mode": "additive",
+  "provider": {
+    "capabilities": ["reservations", "availability"]
+  },
+  "entities": [
+    {
+      "entity_id": "rest-123",
+      "domain": "example-restaurant.com",
+      "name": "Example Restaurant",
+      "category": "restaurant",
+      "location": {
+        "city": "Paris",
+        "country": "FR"
+      }
+    },
+    {
+      "entity_id": "rest-456",
+      "name": "Another Restaurant",
+      "category": "restaurant"
+    }
+  ]
+}`
+
+const responseExample = `{
+  "success": true,
+  "provider": "your-provider-id",
+  "sync_mode": "additive",
+  "results": {
+    "total": 2,
+    "created": 1,
+    "updated": 1,
+    "deleted": 0,
+    "errors": 0
+  }
+}`
+
+const entityCardTemplate = `{
+  "schema_version": "0.1.0",
+  "domain": "CLIENT_DOMAIN.com",
+  "mcps": [
+    {
+      "provider": "your-provider-id",
+      "endpoint": "https://your-mcp-endpoint.com"
+    }
+  ]
+}`
 
 export default function ProvidersPage() {
   return (
@@ -30,34 +79,11 @@ export default function ProvidersPage() {
 
       <h2>Provider Registration API</h2>
 
-      <pre className="my-4"><code>{`POST https://api.dockai.co/v1/providers/register
-Authorization: Bearer sk_live_xxxxxxxxxxxxx`}</code></pre>
+      <CodeBlock className="my-4">{endpointExample}</CodeBlock>
 
       <h3>Request Body</h3>
 
-      <pre className="my-4"><code>{`{
-  "sync_mode": "additive",
-  "provider": {
-    "capabilities": ["reservations", "availability"]
-  },
-  "entities": [
-    {
-      "entity_id": "rest-123",
-      "domain": "example-restaurant.com",
-      "name": "Example Restaurant",
-      "category": "restaurant",
-      "location": {
-        "city": "Paris",
-        "country": "FR"
-      }
-    },
-    {
-      "entity_id": "rest-456",
-      "name": "Another Restaurant",
-      "category": "restaurant"
-    }
-  ]
-}`}</code></pre>
+      <CodeBlock className="my-4">{requestExample}</CodeBlock>
 
       <h2>Fields Reference</h2>
 
@@ -176,18 +202,7 @@ Authorization: Bearer sk_live_xxxxxxxxxxxxx`}</code></pre>
 
       <h2>Response</h2>
 
-      <pre className="my-4"><code>{`{
-  "success": true,
-  "provider": "your-provider-id",
-  "sync_mode": "additive",
-  "results": {
-    "total": 2,
-    "created": 1,
-    "updated": 1,
-    "deleted": 0,
-    "errors": 0
-  }
-}`}</code></pre>
+      <CodeBlock className="my-4">{responseExample}</CodeBlock>
 
       <h2>Dual Attestation</h2>
 
@@ -203,16 +218,7 @@ Authorization: Bearer sk_live_xxxxxxxxxxxxx`}</code></pre>
         To help your clients set this up, provide them with an Entity Card template:
       </p>
 
-      <pre className="my-4"><code>{`{
-  "schema_version": "0.1.0",
-  "domain": "CLIENT_DOMAIN.com",
-  "mcps": [
-    {
-      "provider": "your-provider-id",
-      "endpoint": "https://your-mcp-endpoint.com"
-    }
-  ]
-}`}</code></pre>
+      <CodeBlock className="my-4">{entityCardTemplate}</CodeBlock>
 
       <h2>Rate Limits</h2>
 

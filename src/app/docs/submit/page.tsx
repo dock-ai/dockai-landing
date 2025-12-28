@@ -1,7 +1,23 @@
-export const metadata = {
-  title: 'Submit Domain - Dock AI',
-  description: 'Submit your domain to index your Entity Card in the Dock AI registry.',
-}
+'use client'
+
+import { CodeBlock } from '@/components/ui/code-block'
+
+const requestExample = `{
+  "domain": "yourdomain.com"
+}`
+
+const responseExample = `{
+  "success": true,
+  "entity": {
+    "domain": "yourdomain.com",
+    "verification_level": 1,
+    "mcps_count": 2
+  }
+}`
+
+const curlExample = `curl -X POST https://api.dockai.co/v1/submit \\
+  -H "Content-Type: application/json" \\
+  -d '{"domain": "yourdomain.com"}'`
 
 export default function SubmitPage() {
   return (
@@ -23,24 +39,15 @@ export default function SubmitPage() {
 
       <h2>API Endpoint</h2>
 
-      <pre className="my-4"><code>POST https://api.dockai.co/v1/submit</code></pre>
+      <CodeBlock className="my-4">POST https://api.dockai.co/v1/submit</CodeBlock>
 
       <h3>Request</h3>
 
-      <pre className="my-4"><code>{`{
-  "domain": "yourdomain.com"
-}`}</code></pre>
+      <CodeBlock className="my-4">{requestExample}</CodeBlock>
 
       <h3>Response</h3>
 
-      <pre className="my-4"><code>{`{
-  "success": true,
-  "entity": {
-    "domain": "yourdomain.com",
-    "verification_level": 1,
-    "mcps_count": 2
-  }
-}`}</code></pre>
+      <CodeBlock className="my-4">{responseExample}</CodeBlock>
 
       <h2>Verification Level</h2>
 
@@ -97,9 +104,7 @@ export default function SubmitPage() {
 
       <h2>cURL Example</h2>
 
-      <pre className="my-4"><code>{`curl -X POST https://api.dockai.co/v1/submit \\
-  -H "Content-Type: application/json" \\
-  -d '{"domain": "yourdomain.com"}'`}</code></pre>
+      <CodeBlock className="my-4">{curlExample}</CodeBlock>
     </div>
   )
 }

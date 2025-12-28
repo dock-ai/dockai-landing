@@ -1,7 +1,35 @@
-export const metadata = {
-  title: 'Entity Card - Dock AI',
-  description: 'Learn how to create and host an Entity Card for your business.',
-}
+'use client'
+
+import { CodeBlock } from '@/components/ui/code-block'
+
+const schemaExample = `{
+  "schema_version": "0.1.0",
+  "domain": "yourdomain.com",
+  "mcps": [
+    {
+      "provider": "provider-name",
+      "endpoint": "https://mcp.provider.com",
+      "entity_id": "your-id-at-provider",
+      "capabilities": ["reservations", "availability"],
+      "priority": 10
+    }
+  ]
+}`
+
+const priorityExample = `{
+  "mcps": [
+    {
+      "provider": "preferred-provider",
+      "endpoint": "https://mcp.preferred.com",
+      "priority": 10
+    },
+    {
+      "provider": "backup-provider",
+      "endpoint": "https://mcp.backup.com",
+      "priority": 5
+    }
+  ]
+}`
 
 export default function EntityCardPage() {
   return (
@@ -18,23 +46,11 @@ export default function EntityCardPage() {
         Host your Entity Card at the well-known path:
       </p>
 
-      <pre className="my-4"><code>https://yourdomain.com/.well-known/entity-card.json</code></pre>
+      <CodeBlock className="my-4">https://yourdomain.com/.well-known/entity-card.json</CodeBlock>
 
       <h2>Schema</h2>
 
-      <pre className="my-4"><code>{`{
-  "schema_version": "0.1.0",
-  "domain": "yourdomain.com",
-  "mcps": [
-    {
-      "provider": "provider-name",
-      "endpoint": "https://mcp.provider.com",
-      "entity_id": "your-id-at-provider",
-      "capabilities": ["reservations", "availability"],
-      "priority": 10
-    }
-  ]
-}`}</code></pre>
+      <CodeBlock className="my-4">{schemaExample}</CodeBlock>
 
       <h2>Fields</h2>
 
@@ -135,20 +151,7 @@ export default function EntityCardPage() {
         your preferred provider. Higher values indicate higher priority.
       </p>
 
-      <pre className="my-4"><code>{`{
-  "mcps": [
-    {
-      "provider": "preferred-provider",
-      "endpoint": "https://mcp.preferred.com",
-      "priority": 10
-    },
-    {
-      "provider": "backup-provider",
-      "endpoint": "https://mcp.backup.com",
-      "priority": 5
-    }
-  ]
-}`}</code></pre>
+      <CodeBlock className="my-4">{priorityExample}</CodeBlock>
 
       <div className="mt-8 p-4 bg-zinc-900 border border-zinc-800 rounded-lg">
         <p className="text-sm text-zinc-400">
