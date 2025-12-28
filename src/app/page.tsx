@@ -122,7 +122,7 @@ export default function Home() {
       <header className="border-b border-zinc-800">
         <div className="max-w-5xl mx-auto px-4 py-4 flex items-center justify-between">
           <Link href="/" className="flex items-center gap-2 text-xl font-semibold text-white">
-            <Image src="/favicon.ico" alt="Dock AI" width={24} height={24} />
+            <Image src="/icon.svg" alt="Dock AI" width={24} height={24} />
             Dock AI
           </Link>
           <nav className="flex items-center gap-6">
