@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import Image from 'next/image'
 
 const docsNav = [
   { href: '/docs', label: 'Overview' },
@@ -17,22 +18,30 @@ export default function DocsLayout({
       {/* Header */}
       <header className="border-b border-zinc-800">
         <div className="max-w-5xl mx-auto px-4 py-4 flex items-center justify-between">
-          <Link href="/" className="text-xl font-semibold text-teal-400">
+          <Link href="/" className="flex items-center gap-2 text-xl font-semibold text-white">
+            <Image src="/favicon.ico" alt="Dock AI" width={24} height={24} />
             Dock AI
           </Link>
           <nav className="flex items-center gap-6">
             <Link href="/docs" className="text-sm text-white">
               Docs
             </Link>
-            <Link href="/protocol" className="text-sm text-zinc-400 hover:text-white">
+            <a
+              href="https://github.com/edp-protocol/entity-discovery-protocol"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-sm text-zinc-400 hover:text-white"
+            >
               Protocol
-            </Link>
-            <Link
+            </a>
+            <a
               href="https://provider.dockai.co"
+              target="_blank"
+              rel="noopener noreferrer"
               className="text-sm text-teal-400 hover:text-teal-300"
             >
               For Providers
-            </Link>
+            </a>
           </nav>
         </div>
       </header>

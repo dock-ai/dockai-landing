@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import Link from 'next/link'
+import Image from 'next/image'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Card, CardContent } from '@/components/ui/card'
@@ -120,22 +121,30 @@ export default function Home() {
       {/* Header */}
       <header className="border-b border-zinc-800">
         <div className="max-w-5xl mx-auto px-4 py-4 flex items-center justify-between">
-          <Link href="/" className="text-xl font-semibold text-teal-400">
+          <Link href="/" className="flex items-center gap-2 text-xl font-semibold text-white">
+            <Image src="/favicon.ico" alt="Dock AI" width={24} height={24} />
             Dock AI
           </Link>
           <nav className="flex items-center gap-6">
             <Link href="/docs" className="text-sm text-zinc-400 hover:text-white">
               Docs
             </Link>
-            <Link href="/protocol" className="text-sm text-zinc-400 hover:text-white">
+            <a
+              href="https://github.com/edp-protocol/entity-discovery-protocol"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-sm text-zinc-400 hover:text-white"
+            >
               Protocol
-            </Link>
-            <Link
+            </a>
+            <a
               href="https://provider.dockai.co"
+              target="_blank"
+              rel="noopener noreferrer"
               className="text-sm text-teal-400 hover:text-teal-300"
             >
               For Providers
-            </Link>
+            </a>
           </nav>
         </div>
       </header>
@@ -150,9 +159,14 @@ export default function Home() {
             Discover which MCP servers can interact with any entity.
             <br />
             The first{' '}
-            <Link href="/protocol" className="text-teal-400 hover:underline">
+            <a
+              href="https://github.com/edp-protocol/entity-discovery-protocol"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-teal-400 hover:underline"
+            >
               Entity Discovery Protocol
-            </Link>{' '}
+            </a>{' '}
             registry.
           </p>
 
@@ -314,12 +328,22 @@ export default function Home() {
             <Link href="/docs" className="hover:text-white">
               Docs
             </Link>
-            <Link href="/protocol" className="hover:text-white">
+            <a
+              href="https://github.com/edp-protocol/entity-discovery-protocol"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-white"
+            >
               Protocol
-            </Link>
-            <Link href="https://github.com/dock-ai" className="hover:text-white">
+            </a>
+            <a
+              href="https://github.com/dock-ai"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-white"
+            >
               GitHub
-            </Link>
+            </a>
           </div>
         </div>
       </footer>
