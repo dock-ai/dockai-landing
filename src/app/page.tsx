@@ -209,9 +209,9 @@ export default function Home() {
                     <div key={i} className="p-3 bg-zinc-950 rounded border border-zinc-800">
                       <div className="flex items-center justify-between">
                         <span className="text-teal-400 font-mono text-sm">{mcp.provider}</span>
-                        {mcp.verification?.method === 'dual_attestation' && (
-                          <Badge className="bg-teal-600 text-xs">Verified</Badge>
-                        )}
+                        <Badge className={mcp.verification?.level === 2 ? 'bg-teal-600' : mcp.verification?.level === 1 ? 'bg-zinc-600 text-zinc-100' : 'bg-zinc-700 text-zinc-300'}>
+                          Level {mcp.verification?.level ?? 0}
+                        </Badge>
                       </div>
                       <p className="text-zinc-500 text-xs mt-1 font-mono">{mcp.endpoint}</p>
                       {mcp.capabilities && mcp.capabilities.length > 0 && (
