@@ -197,7 +197,7 @@ export default function Home() {
                   <p className="text-white font-medium">{result.entity.name || result.entity.domain}</p>
                   <p className="text-zinc-500 text-sm">{result.entity.domain}</p>
                 </div>
-                <Badge className={result.entity.verification_level === 2 ? 'bg-teal-600' : 'bg-zinc-700'}>
+                <Badge className={result.entity.verification_level === 2 ? 'bg-teal-600' : 'bg-zinc-600 text-zinc-100'}>
                   Level {result.entity.verification_level}
                 </Badge>
               </div>
