@@ -20,6 +20,12 @@ interface McpResult {
   }
 }
 
+interface PendingProvider {
+  provider_domain: string
+  provider: string
+  capabilities?: string[]
+}
+
 interface ResolveResult {
   entity: {
     domain: string
@@ -28,6 +34,7 @@ interface ResolveResult {
     verification_level: number
   }
   mcps: McpResult[]
+  pending_providers?: PendingProvider[]
 }
 
 export default function Home() {
@@ -192,14 +199,9 @@ export default function Home() {
 
           {result && (
             <div className="mt-6 p-4 bg-zinc-900 border border-zinc-800 rounded-lg text-left max-w-xl mx-auto">
-              <div className="flex items-center justify-between mb-4">
-                <div>
-                  <p className="text-white font-medium">{result.entity.name || result.entity.domain}</p>
-                  <p className="text-zinc-500 text-sm">{result.entity.domain}</p>
-                </div>
-                <Badge className={result.entity.verification_level === 2 ? 'bg-teal-600' : 'bg-zinc-600 text-zinc-100'}>
-                  Level {result.entity.verification_level}
-                </Badge>
+              <div className="mb-4">
+                <p className="text-white font-medium">{result.entity.name || result.entity.domain}</p>
+                <p className="text-zinc-500 text-sm">{result.entity.domain}</p>
               </div>
 
               {result.mcps.length > 0 ? (
@@ -225,6 +227,33 @@ export default function Home() {
                       )}
                     </div>
                   ))}
+                </div>
+              ) : result.pending_providers && result.pending_providers.length > 0 ? (
+                <div className="space-y-2">
+                  <p className="text-zinc-400 text-sm mb-2">Known Providers (not yet on Dock AI):</p>
+                  {result.pending_providers.map((pp, i) => (
+                    <div key={i} className="p-3 bg-zinc-950 rounded border border-dashed border-zinc-700">
+                      <div className="flex items-center justify-between">
+                        <span className="text-zinc-400 font-mono text-sm">{pp.provider}</span>
+                        <Badge className="bg-amber-600/20 text-amber-400 border border-amber-600/30">
+                          Pending
+                        </Badge>
+                      </div>
+                      <p className="text-zinc-600 text-xs mt-1 font-mono">{pp.provider_domain}</p>
+                      {pp.capabilities && pp.capabilities.length > 0 && (
+                        <div className="flex gap-1 mt-2">
+                          {pp.capabilities.map((cap) => (
+                            <Badge key={cap} variant="secondary" className="text-xs bg-zinc-800">
+                              {cap}
+                            </Badge>
+                          ))}
+                        </div>
+                      )}
+                    </div>
+                  ))}
+                  <p className="text-zinc-600 text-xs mt-2">
+                    This entity uses these providers, but they haven&apos;t joined Dock AI yet.
+                  </p>
                 </div>
               ) : (
                 <p className="text-zinc-500 text-sm">No MCP providers found</p>

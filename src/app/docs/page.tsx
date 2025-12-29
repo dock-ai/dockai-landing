@@ -35,6 +35,34 @@ export default function DocsPage() {
         connect directly to the MCP server.
       </p>
 
+      <h2>Dock AI Extension: Pending Providers</h2>
+
+      <p>
+        Dock AI pre-indexes entities from various sources. When an entity is known to use a provider
+        that hasn&apos;t registered yet, the API returns a <code>pending_providers</code> field.
+      </p>
+
+      <div className="my-4 p-4 bg-zinc-900 border border-zinc-800 rounded-lg">
+        <p className="text-zinc-500 text-sm mb-2">Example response with pending provider:</p>
+        <pre className="text-sm overflow-x-auto">
+{`{
+  "entity": { "domain": "example.com", ... },
+  "mcps": [],
+  "pending_providers": [
+    {
+      "provider_domain": "booking-platform.com",
+      "capabilities": ["reservations"]
+    }
+  ]
+}`}
+        </pre>
+      </div>
+
+      <p className="text-zinc-400 text-sm">
+        This is a <strong className="text-white">Dock AI-specific extension</strong>, not part of the EDP spec.
+        It allows AI agents to inform users when a provider hasn&apos;t joined yet.
+      </p>
+
       <h2>Verification Levels</h2>
 
       <p>Trust is established through a verification system:</p>
