@@ -48,9 +48,19 @@ export default function McpPage() {
 
       <CodeBlock className="my-4">{configExample}</CodeBlock>
 
-      <p className="text-zinc-400 text-sm">
+      <p className="text-zinc-400 text-sm my-2">
         Config file location: <code>~/Library/Application Support/Claude/claude_desktop_config.json</code>
       </p>
+
+      <div className="my-6 p-4 bg-zinc-900 border border-zinc-800 rounded-lg">
+        <p className="text-sm">
+          <strong className="text-white">Remote URL:</strong>{' '}
+          <code className="text-teal-400">https://mcp.dockai.co/mcp</code>
+        </p>
+        <p className="text-zinc-500 text-sm mt-2">
+          No installation required. Just add the URL to your MCP client.
+        </p>
+      </div>
 
       <h2>How it works</h2>
 
