@@ -8,6 +8,7 @@ import { Input } from '@/components/ui/input'
 import { Card, CardContent } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
+import { EntityCardGenerator } from '@/components/entity-card-generator'
 
 interface McpResult {
   provider: string
@@ -54,10 +55,6 @@ export default function Home() {
   const [submitLoading, setSubmitLoading] = useState(false)
   const [submitResult, setSubmitResult] = useState<{ success: boolean; message: string } | null>(null)
 
-  // Generator state
-  const [genEndpoint, setGenEndpoint] = useState('')
-  const [genProvider, setGenProvider] = useState('')
-  const [genEntityName, setGenEntityName] = useState('')
 
   const handleResolve = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -112,29 +109,6 @@ export default function Home() {
 
     setSubmitLoading(false)
   }
-
-  const generatedJson = genEndpoint
-    ? JSON.stringify(
-        {
-          schema_version: '0.2.0',
-          domain: 'example-restaurant.com',
-          entities: [
-            {
-              name: genEntityName || 'My Business',
-              path: '/',
-              mcps: [
-                {
-                  provider: genProvider || 'provider-name',
-                  endpoint: genEndpoint,
-                },
-              ],
-            },
-          ],
-        },
-        null,
-        2
-      )
-    : ''
 
   return (
     <div className="min-h-screen">
@@ -333,49 +307,7 @@ export default function Home() {
             <TabsContent value="generate" className="mt-6">
               <Card className="bg-zinc-900 border-zinc-800">
                 <CardContent className="p-6">
-                  <p className="text-zinc-400 text-sm mb-4">
-                    Generate an Entity Card to host on your website.
-                  </p>
-                  <div className="space-y-3 mb-4">
-                    <Input
-                      placeholder="Entity name (e.g., Acme Bistro)"
-                      value={genEntityName}
-                      onChange={(e) => setGenEntityName(e.target.value)}
-                      className="bg-zinc-950 border-zinc-700 text-white"
-                    />
-                    <Input
-                      placeholder="MCP Endpoint (e.g., https://mcp.provider.com)"
-                      value={genEndpoint}
-                      onChange={(e) => setGenEndpoint(e.target.value)}
-                      className="bg-zinc-950 border-zinc-700 text-white"
-                    />
-                    <Input
-                      placeholder="Provider name (optional)"
-                      value={genProvider}
-                      onChange={(e) => setGenProvider(e.target.value)}
-                      className="bg-zinc-950 border-zinc-700 text-white"
-                    />
-                  </div>
-                  {generatedJson && (
-                    <div className="relative">
-                      <pre className="bg-zinc-950 border border-zinc-800 rounded-lg p-4 text-sm font-mono text-zinc-300 overflow-x-auto">
-                        {generatedJson}
-                      </pre>
-                      <Button
-                        size="sm"
-                        variant="secondary"
-                        className="absolute top-2 right-2"
-                        onClick={() => navigator.clipboard.writeText(generatedJson)}
-                      >
-                        Copy
-                      </Button>
-                    </div>
-                  )}
-                  {generatedJson && (
-                    <p className="text-zinc-500 text-xs mt-3">
-                      Host this file at <code className="text-teal-400">/.well-known/entity-card.json</code> on your domain.
-                    </p>
-                  )}
+                  <EntityCardGenerator />
                 </CardContent>
               </Card>
             </TabsContent>
