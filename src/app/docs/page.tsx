@@ -103,6 +103,16 @@ export default function DocsPage() {
             Register your MCP server and bulk-register entities.
           </p>
         </Link>
+
+        <Link
+          href="/docs/mcp"
+          className="block p-4 bg-zinc-900 border border-zinc-800 rounded-lg hover:border-zinc-700 no-underline"
+        >
+          <h3 className="text-white font-medium mb-1">For AI Agents</h3>
+          <p className="text-zinc-400 text-sm">
+            Use the Dock AI MCP server to discover entity endpoints.
+          </p>
+        </Link>
       </div>
 
       <h2>API Reference</h2>
