@@ -258,7 +258,7 @@ export function EntityCardGenerator() {
           </label>
           <button
             onClick={addEntity}
-            className="flex items-center gap-1 text-sm text-teal-400 hover:text-teal-300"
+            className="flex items-center gap-1 text-sm text-teal-400 hover:text-teal-300 cursor-pointer"
           >
             <Plus size={16} /> Add Entity
           </button>
@@ -272,7 +272,7 @@ export function EntityCardGenerator() {
             >
               {/* Entity Header */}
               <div
-                className="flex items-center justify-between px-4 py-3 bg-zinc-800/50 cursor-pointer"
+                className="flex items-center justify-between px-4 py-3 bg-zinc-800/50 cursor-pointer select-none"
                 onClick={() => toggleEntity(entity.id)}
               >
                 <div className="flex items-center gap-2">
@@ -287,7 +287,7 @@ export function EntityCardGenerator() {
                 {entities.length > 1 && (
                   <button
                     onClick={e => { e.stopPropagation(); removeEntity(entity.id) }}
-                    className="p-1 text-zinc-500 hover:text-red-400"
+                    className="p-1 text-zinc-500 hover:text-red-400 cursor-pointer"
                   >
                     <Trash2 size={16} />
                   </button>
@@ -365,7 +365,7 @@ export function EntityCardGenerator() {
                       <label className="block text-xs text-zinc-400">MCP Providers</label>
                       <button
                         onClick={() => addMcp(entity.id)}
-                        className="flex items-center gap-1 text-xs text-teal-400 hover:text-teal-300"
+                        className="flex items-center gap-1 text-xs text-teal-400 hover:text-teal-300 cursor-pointer"
                       >
                         <Plus size={14} /> Add MCP
                       </button>
@@ -384,7 +384,7 @@ export function EntityCardGenerator() {
                             {entity.mcps.length > 1 && (
                               <button
                                 onClick={() => removeMcp(entity.id, mcp.id)}
-                                className="p-1 text-zinc-500 hover:text-red-400"
+                                className="p-1 text-zinc-500 hover:text-red-400 cursor-pointer"
                               >
                                 <Trash2 size={14} />
                               </button>
@@ -455,7 +455,7 @@ export function EntityCardGenerator() {
                                       <button
                                         key={cap}
                                         onClick={() => toggleCapability(entity.id, mcp.id, cap)}
-                                        className={`px-2 py-0.5 text-xs rounded border transition-colors ${
+                                        className={`px-2 py-0.5 text-xs rounded border transition-colors cursor-pointer ${
                                           mcp.capabilities.includes(cap)
                                             ? 'bg-teal-500/20 border-teal-500 text-teal-300'
                                             : 'bg-zinc-800 border-zinc-700 text-zinc-400 hover:border-zinc-600'
@@ -537,14 +537,14 @@ export function EntityCardGenerator() {
           <div className="flex gap-2">
             <button
               onClick={copyToClipboard}
-              className="flex items-center gap-1.5 px-3 py-1.5 text-sm bg-zinc-800 hover:bg-zinc-700 rounded-lg transition-colors"
+              className="flex items-center gap-1.5 px-3 py-1.5 text-sm bg-zinc-800 hover:bg-zinc-700 rounded-lg transition-colors cursor-pointer"
             >
               <Copy size={14} />
               {copied ? 'Copied!' : 'Copy'}
             </button>
             <button
               onClick={downloadJson}
-              className="flex items-center gap-1.5 px-3 py-1.5 text-sm bg-teal-600 hover:bg-teal-500 rounded-lg transition-colors"
+              className="flex items-center gap-1.5 px-3 py-1.5 text-sm bg-teal-600 hover:bg-teal-500 rounded-lg transition-colors cursor-pointer"
             >
               <Download size={14} />
               Download
