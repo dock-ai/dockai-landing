@@ -26,14 +26,20 @@ interface PendingProvider {
   capabilities?: string[]
 }
 
-interface ResolveResult {
-  entity: {
-    domain: string
-    name?: string
-    category?: string
-    verification_level: number
+interface EntityResult {
+  name: string
+  path?: string
+  location?: {
+    city?: string
+    country?: string
   }
+  verification_level: number
   mcps: McpResult[]
+}
+
+interface ResolveResult {
+  domain: string
+  entities: EntityResult[]
   pending_providers?: PendingProvider[]
 }
 
@@ -205,30 +211,47 @@ export default function Home() {
           {result && (
             <div className="mt-6 p-4 bg-zinc-900 border border-zinc-800 rounded-lg text-left max-w-xl mx-auto">
               <div className="mb-4">
-                <p className="text-white font-medium">{result.entity.name || result.entity.domain}</p>
-                <p className="text-zinc-500 text-sm">{result.entity.domain}</p>
+                <p className="text-zinc-500 text-sm">{result.domain}</p>
               </div>
 
-              {result.mcps.length > 0 ? (
-                <div className="space-y-2">
-                  <p className="text-zinc-400 text-sm mb-2">MCP Providers:</p>
-                  {result.mcps.map((mcp, i) => (
-                    <div key={i} className="p-3 bg-zinc-950 rounded border border-zinc-800">
+              {result.entities.length > 0 ? (
+                <div className="space-y-4">
+                  {result.entities.map((entity, entityIndex) => (
+                    <div key={entityIndex} className="space-y-2">
                       <div className="flex items-center justify-between">
-                        <span className="text-teal-400 font-mono text-sm">{mcp.provider}</span>
-                        <Badge className={mcp.verification?.level === 2 ? 'bg-teal-600' : mcp.verification?.level === 1 ? 'bg-zinc-600 text-zinc-100' : 'bg-zinc-700 text-zinc-300'}>
-                          Level {mcp.verification?.level ?? 0}
-                        </Badge>
+                        <p className="text-white font-medium">
+                          {entity.name}
+                          {entity.path && <span className="text-zinc-500 text-sm ml-2">{entity.path}</span>}
+                        </p>
+                        {entity.location?.city && (
+                          <span className="text-zinc-500 text-xs">{entity.location.city}, {entity.location.country}</span>
+                        )}
                       </div>
-                      <p className="text-zinc-500 text-xs mt-1 font-mono">{mcp.endpoint}</p>
-                      {mcp.capabilities && mcp.capabilities.length > 0 && (
-                        <div className="flex gap-1 mt-2">
-                          {mcp.capabilities.map((cap) => (
-                            <Badge key={cap} variant="secondary" className="text-xs">
-                              {cap}
-                            </Badge>
+                      {entity.mcps.length > 0 ? (
+                        <div className="space-y-2">
+                          {entity.mcps.map((mcp, i) => (
+                            <div key={i} className="p-3 bg-zinc-950 rounded border border-zinc-800">
+                              <div className="flex items-center justify-between">
+                                <span className="text-teal-400 font-mono text-sm">{mcp.provider}</span>
+                                <Badge className={mcp.verification?.level === 2 ? 'bg-teal-600' : mcp.verification?.level === 1 ? 'bg-zinc-600 text-zinc-100' : 'bg-zinc-700 text-zinc-300'}>
+                                  Level {mcp.verification?.level ?? 0}
+                                </Badge>
+                              </div>
+                              <p className="text-zinc-500 text-xs mt-1 font-mono">{mcp.endpoint}</p>
+                              {mcp.capabilities && mcp.capabilities.length > 0 && (
+                                <div className="flex gap-1 mt-2">
+                                  {mcp.capabilities.map((cap) => (
+                                    <Badge key={cap} variant="secondary" className="text-xs">
+                                      {cap}
+                                    </Badge>
+                                  ))}
+                                </div>
+                              )}
+                            </div>
                           ))}
                         </div>
+                      ) : (
+                        <p className="text-zinc-500 text-sm">No MCP providers for this entity</p>
                       )}
                     </div>
                   ))}
@@ -257,7 +280,7 @@ export default function Home() {
                     </div>
                   ))}
                   <p className="text-zinc-600 text-xs mt-2">
-                    This entity uses these providers, but they haven&apos;t joined Dock AI yet.
+                    This domain uses these providers, but they haven&apos;t joined Dock AI yet.
                   </p>
                 </div>
               ) : (
