@@ -7,6 +7,7 @@ const docsNav = [
   { href: '/docs/submit', label: 'Submit Domain' },
   { href: '/docs/providers', label: 'For Providers' },
   { href: '/docs/mcp', label: 'For AI Agents' },
+  { href: '/docs/api', label: 'API Reference' },
 ]
 
 export default function DocsLayout({
