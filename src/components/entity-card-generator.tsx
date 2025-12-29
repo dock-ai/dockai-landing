@@ -375,7 +375,7 @@ export function EntityCardGenerator() {
                       {entity.mcps.map((mcp, mcpIndex) => (
                         <div
                           key={mcp.id}
-                          className="p-3 bg-zinc-900/50 border border-zinc-800 rounded-lg space-y-3"
+                          className="p-3 bg-zinc-900 border border-zinc-800 rounded-lg space-y-3"
                         >
                           <div className="flex items-center justify-between">
                             <span className="text-xs text-zinc-500">
@@ -557,7 +557,7 @@ export function EntityCardGenerator() {
       </div>
 
       {/* Instructions */}
-      <div className="p-4 bg-zinc-900/50 border border-zinc-800 rounded-lg">
+      <div className="p-4 bg-zinc-900 border border-zinc-800 rounded-lg">
         <h4 className="font-medium text-zinc-200 mb-2">Next Steps</h4>
         <ol className="list-decimal list-inside text-sm text-zinc-400 space-y-1">
           <li>Download or copy the generated JSON</li>
