@@ -3,30 +3,89 @@
 import { CodeBlock } from '@/components/ui/code-block'
 
 const schemaExample = `{
-  "schema_version": "0.1.0",
-  "domain": "yourdomain.com",
-  "mcps": [
+  "schema_version": "0.2.0",
+  "domain": "example-restaurant.com",
+  "entities": [
     {
-      "provider": "provider-name",
-      "endpoint": "https://mcp.provider.com",
-      "entity_id": "your-id-at-provider",
-      "capabilities": ["reservations", "availability"],
-      "priority": 10
+      "name": "Acme Bistro",
+      "path": "/",
+      "location": {
+        "city": "Paris",
+        "country": "FR"
+      },
+      "mcps": [
+        {
+          "provider": "booking-provider",
+          "endpoint": "https://mcp.booking-provider.com",
+          "entity_id": "rest-123",
+          "capabilities": ["reservations", "availability"],
+          "priority": 10
+        }
+      ]
+    }
+  ]
+}`
+
+const multiEntityExample = `{
+  "schema_version": "0.2.0",
+  "domain": "acme-bistro-group.com",
+  "entities": [
+    {
+      "name": "Acme Bistro Downtown",
+      "path": "/locations/downtown",
+      "location": {
+        "city": "New York",
+        "country": "US"
+      },
+      "mcps": [
+        {
+          "provider": "booking-provider",
+          "endpoint": "https://mcp.booking-provider.com",
+          "entity_id": "downtown-123",
+          "capabilities": ["reservations"],
+          "priority": 10
+        }
+      ]
+    },
+    {
+      "name": "Acme Bistro Uptown",
+      "path": "/locations/uptown",
+      "location": {
+        "city": "New York",
+        "country": "US"
+      },
+      "mcps": [
+        {
+          "provider": "booking-provider",
+          "endpoint": "https://mcp.booking-provider.com",
+          "entity_id": "uptown-456",
+          "capabilities": ["reservations"],
+          "priority": 10
+        }
+      ]
     }
   ]
 }`
 
 const priorityExample = `{
-  "mcps": [
+  "schema_version": "0.2.0",
+  "domain": "example-restaurant.com",
+  "entities": [
     {
-      "provider": "preferred-provider",
-      "endpoint": "https://mcp.preferred.com",
-      "priority": 10
-    },
-    {
-      "provider": "backup-provider",
-      "endpoint": "https://mcp.backup.com",
-      "priority": 5
+      "name": "Example Restaurant",
+      "path": "/",
+      "mcps": [
+        {
+          "provider": "preferred-provider",
+          "endpoint": "https://mcp.preferred-provider.com",
+          "priority": 10
+        },
+        {
+          "provider": "backup-provider",
+          "endpoint": "https://mcp.backup-provider.com",
+          "priority": 5
+        }
+      ]
     }
   ]
 }`
@@ -38,6 +97,7 @@ export default function EntityCardPage() {
 
       <p className="text-lg text-zinc-400 mt-4">
         An Entity Card is a JSON file that declares which MCP providers can interact with your business.
+        Version 0.2.0 introduces multi-entity support, allowing a single domain to define multiple entities.
       </p>
 
       <h2>File Location</h2>
@@ -46,7 +106,7 @@ export default function EntityCardPage() {
         Host your Entity Card at the well-known path:
       </p>
 
-      <CodeBlock className="my-4">https://yourdomain.com/.well-known/entity-card.json</CodeBlock>
+      <CodeBlock className="my-4">https://example-restaurant.com/.well-known/entity-card.json</CodeBlock>
 
       <h2>Schema</h2>
 
@@ -70,7 +130,7 @@ export default function EntityCardPage() {
             <td className="py-2 font-mono">schema_version</td>
             <td className="py-2">string</td>
             <td className="py-2">Yes</td>
-            <td className="py-2 text-zinc-400">Must be &quot;0.1.0&quot;</td>
+            <td className="py-2 text-zinc-400">Must be &quot;0.2.0&quot;</td>
           </tr>
           <tr className="border-b border-zinc-800">
             <td className="py-2 font-mono">domain</td>
@@ -79,10 +139,49 @@ export default function EntityCardPage() {
             <td className="py-2 text-zinc-400">Your domain (must match where file is hosted)</td>
           </tr>
           <tr className="border-b border-zinc-800">
+            <td className="py-2 font-mono">entities</td>
+            <td className="py-2">array</td>
+            <td className="py-2">Yes</td>
+            <td className="py-2 text-zinc-400">List of entities at this domain</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3>Entity Object Fields</h3>
+
+      <table className="w-full my-4 text-sm">
+        <thead>
+          <tr className="border-b border-zinc-800">
+            <th className="text-left py-2 text-zinc-400">Field</th>
+            <th className="text-left py-2 text-zinc-400">Type</th>
+            <th className="text-left py-2 text-zinc-400">Required</th>
+            <th className="text-left py-2 text-zinc-400">Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr className="border-b border-zinc-800">
+            <td className="py-2 font-mono">name</td>
+            <td className="py-2">string</td>
+            <td className="py-2">Yes</td>
+            <td className="py-2 text-zinc-400">Display name of the entity</td>
+          </tr>
+          <tr className="border-b border-zinc-800">
+            <td className="py-2 font-mono">path</td>
+            <td className="py-2">string</td>
+            <td className="py-2">No</td>
+            <td className="py-2 text-zinc-400">URL path for this entity (e.g., &quot;/locations/downtown&quot;)</td>
+          </tr>
+          <tr className="border-b border-zinc-800">
+            <td className="py-2 font-mono">location</td>
+            <td className="py-2">object</td>
+            <td className="py-2">No</td>
+            <td className="py-2 text-zinc-400">Physical location (city, country, coordinates)</td>
+          </tr>
+          <tr className="border-b border-zinc-800">
             <td className="py-2 font-mono">mcps</td>
             <td className="py-2">array</td>
             <td className="py-2">Yes</td>
-            <td className="py-2 text-zinc-400">List of MCP providers</td>
+            <td className="py-2 text-zinc-400">List of MCP providers for this entity</td>
           </tr>
         </tbody>
       </table>
@@ -131,6 +230,20 @@ export default function EntityCardPage() {
           </tr>
         </tbody>
       </table>
+
+      <h2>Multi-Entity Support</h2>
+
+      <p>
+        Version 0.2.0 allows you to define multiple entities under a single domain. This is useful for
+        restaurant groups, hotel chains, or any business with multiple locations.
+      </p>
+
+      <CodeBlock className="my-4">{multiEntityExample}</CodeBlock>
+
+      <p className="text-zinc-400 mt-4">
+        Each entity can have its own <code>path</code> to differentiate between locations, and its own
+        set of MCP providers with unique <code>entity_id</code> values.
+      </p>
 
       <h2>Verification</h2>
 

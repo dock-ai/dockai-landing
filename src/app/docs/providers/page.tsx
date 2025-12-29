@@ -49,12 +49,18 @@ const responseExample = `{
 }`
 
 const entityCardTemplate = `{
-  "schema_version": "0.1.0",
-  "domain": "CLIENT_DOMAIN.com",
-  "mcps": [
+  "schema_version": "0.2.0",
+  "domain": "example-restaurant.com",
+  "entities": [
     {
-      "provider": "your-provider-id",
-      "endpoint": "https://your-mcp-endpoint.com"
+      "name": "Client Business Name",
+      "path": "/",
+      "mcps": [
+        {
+          "provider": "your-provider-id",
+          "endpoint": "https://your-mcp-endpoint.com"
+        }
+      ]
     }
   ]
 }`

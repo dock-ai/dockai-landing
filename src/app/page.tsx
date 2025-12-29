@@ -51,6 +51,7 @@ export default function Home() {
   // Generator state
   const [genEndpoint, setGenEndpoint] = useState('')
   const [genProvider, setGenProvider] = useState('')
+  const [genEntityName, setGenEntityName] = useState('')
 
   const handleResolve = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -109,12 +110,18 @@ export default function Home() {
   const generatedJson = genEndpoint
     ? JSON.stringify(
         {
-          schema_version: '0.1.0',
-          domain: 'YOUR_DOMAIN.com',
-          mcps: [
+          schema_version: '0.2.0',
+          domain: 'example-restaurant.com',
+          entities: [
             {
-              provider: genProvider || 'provider-name',
-              endpoint: genEndpoint,
+              name: genEntityName || 'My Business',
+              path: '/',
+              mcps: [
+                {
+                  provider: genProvider || 'provider-name',
+                  endpoint: genEndpoint,
+                },
+              ],
             },
           ],
         },
@@ -307,6 +314,12 @@ export default function Home() {
                     Generate an Entity Card to host on your website.
                   </p>
                   <div className="space-y-3 mb-4">
+                    <Input
+                      placeholder="Entity name (e.g., Acme Bistro)"
+                      value={genEntityName}
+                      onChange={(e) => setGenEntityName(e.target.value)}
+                      className="bg-zinc-950 border-zinc-700 text-white"
+                    />
                     <Input
                       placeholder="MCP Endpoint (e.g., https://mcp.provider.com)"
                       value={genEndpoint}

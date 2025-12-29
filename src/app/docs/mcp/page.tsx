@@ -11,17 +11,20 @@ const configExample = `{
 }`
 
 const responseExample = `{
-  "entity": {
-    "domain": "example-restaurant.com",
-    "name": "Example Restaurant",
-    "category": "restaurant",
-    "verification_level": 2
-  },
-  "mcps": [
+  "domain": "example-restaurant.com",
+  "entities": [
     {
-      "provider": "booking-provider",
-      "endpoint": "https://mcp.booking-provider.com",
-      "capabilities": ["reservations", "availability"]
+      "name": "Acme Bistro",
+      "path": "/",
+      "category": "restaurant",
+      "verification_level": 2,
+      "mcps": [
+        {
+          "provider": "booking-provider",
+          "endpoint": "https://mcp.booking-provider.com",
+          "capabilities": ["reservations", "availability"]
+        }
+      ]
     }
   ],
   "claude_desktop_config": {

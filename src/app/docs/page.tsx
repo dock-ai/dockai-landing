@@ -46,12 +46,18 @@ export default function DocsPage() {
         <p className="text-zinc-500 text-sm mb-2">Example response with pending provider:</p>
         <pre className="text-sm overflow-x-auto">
 {`{
-  "entity": { "domain": "example.com", ... },
-  "mcps": [],
-  "pending_providers": [
+  "domain": "example-restaurant.com",
+  "entities": [
     {
-      "provider_domain": "booking-platform.com",
-      "capabilities": ["reservations"]
+      "name": "Acme Bistro",
+      "path": "/",
+      "mcps": [],
+      "pending_providers": [
+        {
+          "provider_domain": "booking-provider.com",
+          "capabilities": ["reservations"]
+        }
+      ]
     }
   ]
 }`}
