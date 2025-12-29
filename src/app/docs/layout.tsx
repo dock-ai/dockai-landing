@@ -28,19 +28,11 @@ export default function DocsLayout({
             <Link href="/docs" className="text-sm text-white">
               Docs
             </Link>
-            <a
-              href="https://github.com/edp-protocol/entity-discovery-protocol"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-sm text-zinc-400 hover:text-white"
-            >
-              Protocol
-            </a>
             <Link
               href="/providers"
               className="text-sm text-teal-400 hover:text-teal-300"
             >
-              For Providers
+              For MCP Providers
             </Link>
           </nav>
         </div>
