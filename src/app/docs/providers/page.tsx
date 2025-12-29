@@ -197,7 +197,43 @@ export default function ProvidersPage() {
 
       <CodeBlock className="my-4">{responseExample}</CodeBlock>
 
-      <h2>Dual Attestation</h2>
+      <h2>Verification Levels</h2>
+
+      <table className="w-full my-4 text-sm">
+        <thead>
+          <tr className="border-b border-zinc-800">
+            <th className="text-left py-2 text-zinc-400">Level</th>
+            <th className="text-left py-2 text-zinc-400">Source</th>
+            <th className="text-left py-2 text-zinc-400">Trust</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr className="border-b border-zinc-800">
+            <td className="py-2">0</td>
+            <td className="py-2 text-zinc-400">Provider registration only</td>
+            <td className="py-2 text-zinc-400">Provider claim</td>
+          </tr>
+          <tr className="border-b border-zinc-800">
+            <td className="py-2">1</td>
+            <td className="py-2 text-zinc-400">Entity Card only OR Trusted Provider</td>
+            <td className="py-2 text-zinc-400">Business claim</td>
+          </tr>
+          <tr className="border-b border-zinc-800">
+            <td className="py-2">2</td>
+            <td className="py-2 text-zinc-400">Both match</td>
+            <td className="py-2 text-zinc-400">Dual attestation</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3>Trusted Providers</h3>
+
+      <p className="text-zinc-400 my-4">
+        Providers with established business partnerships can be marked as &quot;trusted&quot;.
+        Their entities start at <strong>Level 1</strong> instead of Level 0, reflecting the existing business relationship.
+      </p>
+
+      <h3>Dual Attestation (Level 2)</h3>
 
       <p>
         When an entity you register also publishes an{' '}
