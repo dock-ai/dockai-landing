@@ -6,6 +6,7 @@ const docsNav = [
   { href: '/docs/entity-card', label: 'Entity Card' },
   { href: '/docs/submit', label: 'Submit Domain' },
   { href: '/docs/providers', label: 'For Providers' },
+  { href: '/docs/mcp', label: 'For AI Agents' },
 ]
 
 export default function DocsLayout({
