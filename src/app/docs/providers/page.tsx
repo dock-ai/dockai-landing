@@ -7,25 +7,31 @@ const endpointExample = `POST https://api.dockai.co/v1/providers/register
 Authorization: Bearer sk_live_xxxxxxxxxxxxx`
 
 const requestExample = `{
-  "sync_mode": "additive",
-  "provider": {
-    "capabilities": ["reservations", "availability"]
-  },
-  "entities": [
+  "operations": [
     {
-      "entity_id": "rest-123",
-      "domain": "example-restaurant.com",
-      "name": "Example Restaurant",
-      "category": "restaurant",
-      "location": {
-        "city": "Paris",
-        "country": "FR"
+      "action": "upsert",
+      "entity": {
+        "entity_id": "rest-123",
+        "domain": "example-restaurant.com",
+        "name": "Example Restaurant",
+        "category": "restaurant",
+        "location": {
+          "city": "Paris",
+          "country": "FR"
+        }
       }
     },
     {
-      "entity_id": "rest-456",
-      "name": "Another Restaurant",
-      "category": "restaurant"
+      "action": "upsert",
+      "entity": {
+        "entity_id": "rest-456",
+        "name": "Another Restaurant",
+        "category": "restaurant"
+      }
+    },
+    {
+      "action": "delete",
+      "entity_id": "old-entity-789"
     }
   ]
 }`
@@ -33,12 +39,11 @@ const requestExample = `{
 const responseExample = `{
   "success": true,
   "provider": "your-provider-id",
-  "sync_mode": "additive",
   "results": {
-    "total": 2,
+    "total": 3,
     "created": 1,
     "updated": 1,
-    "deleted": 0,
+    "deleted": 1,
     "errors": 0
   }
 }`
@@ -60,7 +65,7 @@ export default function ProvidersPage() {
       <h1>For MCP Providers</h1>
 
       <p className="text-lg text-zinc-400 mt-4">
-        Register your MCP server and bulk-register entities you serve.
+        Register your MCP server and manage entities you serve.
       </p>
 
       <h2>Getting Started</h2>
@@ -85,9 +90,15 @@ export default function ProvidersPage() {
 
       <CodeBlock className="my-4">{requestExample}</CodeBlock>
 
-      <h2>Fields Reference</h2>
+      <h2>Operations</h2>
 
-      <h3>Root Fields</h3>
+      <p className="text-zinc-400 my-4">
+        Each request contains an array of operations. Max <strong>1000 operations</strong> per request.
+      </p>
+
+      <h3>Upsert Operation</h3>
+
+      <p className="text-zinc-400 my-2">Create or update an entity:</p>
 
       <table className="w-full my-4 text-sm">
         <thead>
@@ -100,70 +111,43 @@ export default function ProvidersPage() {
         </thead>
         <tbody>
           <tr className="border-b border-zinc-800">
-            <td className="py-2 font-mono">sync_mode</td>
+            <td className="py-2 font-mono">action</td>
             <td className="py-2">string</td>
-            <td className="py-2">No</td>
-            <td className="py-2 text-zinc-400">&quot;additive&quot; (default) or &quot;full&quot;</td>
-          </tr>
-          <tr className="border-b border-zinc-800">
-            <td className="py-2 font-mono">provider</td>
-            <td className="py-2">object</td>
-            <td className="py-2">No</td>
-            <td className="py-2 text-zinc-400">Provider settings</td>
-          </tr>
-          <tr className="border-b border-zinc-800">
-            <td className="py-2 font-mono">entities</td>
-            <td className="py-2">array</td>
             <td className="py-2">Yes</td>
-            <td className="py-2 text-zinc-400">Entities to register</td>
+            <td className="py-2 text-zinc-400">&quot;upsert&quot;</td>
           </tr>
-        </tbody>
-      </table>
-
-      <h3>Entity Fields</h3>
-
-      <table className="w-full my-4 text-sm">
-        <thead>
           <tr className="border-b border-zinc-800">
-            <th className="text-left py-2 text-zinc-400">Field</th>
-            <th className="text-left py-2 text-zinc-400">Type</th>
-            <th className="text-left py-2 text-zinc-400">Required</th>
-            <th className="text-left py-2 text-zinc-400">Description</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr className="border-b border-zinc-800">
-            <td className="py-2 font-mono">entity_id</td>
+            <td className="py-2 font-mono">entity.entity_id</td>
             <td className="py-2">string</td>
             <td className="py-2">Yes</td>
             <td className="py-2 text-zinc-400">Your internal ID</td>
           </tr>
           <tr className="border-b border-zinc-800">
-            <td className="py-2 font-mono">domain</td>
+            <td className="py-2 font-mono">entity.domain</td>
             <td className="py-2">string</td>
             <td className="py-2">No</td>
             <td className="py-2 text-zinc-400">Entity&apos;s domain (if they have one)</td>
           </tr>
           <tr className="border-b border-zinc-800">
-            <td className="py-2 font-mono">name</td>
+            <td className="py-2 font-mono">entity.name</td>
             <td className="py-2">string</td>
             <td className="py-2">Yes</td>
             <td className="py-2 text-zinc-400">Display name</td>
           </tr>
           <tr className="border-b border-zinc-800">
-            <td className="py-2 font-mono">category</td>
+            <td className="py-2 font-mono">entity.category</td>
             <td className="py-2">string</td>
             <td className="py-2">No</td>
             <td className="py-2 text-zinc-400">e.g., restaurant, hotel, salon</td>
           </tr>
           <tr className="border-b border-zinc-800">
-            <td className="py-2 font-mono">capabilities</td>
+            <td className="py-2 font-mono">entity.capabilities</td>
             <td className="py-2">string[]</td>
             <td className="py-2">No</td>
             <td className="py-2 text-zinc-400">Override provider capabilities</td>
           </tr>
           <tr className="border-b border-zinc-800">
-            <td className="py-2 font-mono">location</td>
+            <td className="py-2 font-mono">entity.location</td>
             <td className="py-2">object</td>
             <td className="py-2">No</td>
             <td className="py-2 text-zinc-400">city, country, coordinates</td>
@@ -171,32 +155,41 @@ export default function ProvidersPage() {
         </tbody>
       </table>
 
-      <h2>Sync Modes</h2>
+      <h3>Delete Operation</h3>
+
+      <p className="text-zinc-400 my-2">Remove an entity by its entity_id:</p>
 
       <table className="w-full my-4 text-sm">
         <thead>
           <tr className="border-b border-zinc-800">
-            <th className="text-left py-2 text-zinc-400">Mode</th>
-            <th className="text-left py-2 text-zinc-400">Behavior</th>
+            <th className="text-left py-2 text-zinc-400">Field</th>
+            <th className="text-left py-2 text-zinc-400">Type</th>
+            <th className="text-left py-2 text-zinc-400">Required</th>
+            <th className="text-left py-2 text-zinc-400">Description</th>
           </tr>
         </thead>
         <tbody>
           <tr className="border-b border-zinc-800">
-            <td className="py-2 font-mono">additive</td>
-            <td className="py-2 text-zinc-400">Creates new entities, updates existing. Never deletes. (Default)</td>
+            <td className="py-2 font-mono">action</td>
+            <td className="py-2">string</td>
+            <td className="py-2">Yes</td>
+            <td className="py-2 text-zinc-400">&quot;delete&quot;</td>
           </tr>
           <tr className="border-b border-zinc-800">
-            <td className="py-2 font-mono">full</td>
-            <td className="py-2 text-zinc-400">Full sync. Entities not in request are deleted.</td>
+            <td className="py-2 font-mono">entity_id</td>
+            <td className="py-2">string</td>
+            <td className="py-2">Yes</td>
+            <td className="py-2 text-zinc-400">The entity_id to delete</td>
           </tr>
         </tbody>
       </table>
 
+      <h2>Pagination</h2>
+
       <div className="my-6 p-4 bg-zinc-900 border border-zinc-800 rounded-lg">
         <p className="text-sm text-zinc-400">
-          <strong className="text-white">Matching logic:</strong><br />
-          Entities with <code>domain</code> are matched by domain.<br />
-          Entities without <code>domain</code> are matched by <code>provider:&#123;id&#125;:&#123;entity_id&#125;</code>.
+          <strong className="text-white">Max 1000 operations per request.</strong><br />
+          For larger imports, split your data into batches and send multiple requests.
         </p>
       </div>
 
