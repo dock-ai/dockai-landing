@@ -144,14 +144,12 @@ export default function Home() {
             >
               Protocol
             </a>
-            <a
-              href="https://provider.dockai.co"
-              target="_blank"
-              rel="noopener noreferrer"
+            <Link
+              href="/providers"
               className="text-sm text-teal-400 hover:text-teal-300"
             >
               For Providers
-            </a>
+            </Link>
           </nav>
         </div>
       </header>

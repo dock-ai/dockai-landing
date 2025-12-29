@@ -72,10 +72,10 @@ export default function ProvidersPage() {
 
       <ol className="list-decimal list-inside space-y-2 my-4">
         <li>
-          Register at{' '}
-          <a href="https://provider.dockai.co" className="text-teal-400 hover:underline">
-            provider.dockai.co
-          </a>
+          <Link href="/providers" className="text-teal-400 hover:underline">
+            Contact us
+          </Link>{' '}
+          to get onboarded
         </li>
         <li>Verify your MCP endpoint</li>
         <li>Get your API key</li>
