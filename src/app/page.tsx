@@ -214,7 +214,8 @@ export default function Home() {
                 <p className="text-zinc-500 text-sm">{result.domain}</p>
               </div>
 
-              {result.entities.length > 0 ? (
+              {/* Entities */}
+              {result.entities.length > 0 && (
                 <div className="space-y-4">
                   {result.entities.map((entity, entityIndex) => (
                     <div key={entityIndex} className="space-y-2">
@@ -224,10 +225,10 @@ export default function Home() {
                           {entity.path && <span className="text-zinc-500 text-sm ml-2">{entity.path}</span>}
                         </p>
                         {entity.location?.city && (
-                          <span className="text-zinc-500 text-xs">{entity.location.city}, {entity.location.country}</span>
+                          <span className="text-zinc-500 text-xs">{entity.location.city}{entity.location.country && `, ${entity.location.country}`}</span>
                         )}
                       </div>
-                      {entity.mcps.length > 0 ? (
+                      {entity.mcps.length > 0 && (
                         <div className="space-y-2">
                           {entity.mcps.map((mcp, i) => (
                             <div key={i} className="p-3 bg-zinc-950 rounded border border-zinc-800">
@@ -250,14 +251,15 @@ export default function Home() {
                             </div>
                           ))}
                         </div>
-                      ) : (
-                        <p className="text-zinc-500 text-sm">No MCP providers for this entity</p>
                       )}
                     </div>
                   ))}
                 </div>
-              ) : result.pending_providers && result.pending_providers.length > 0 ? (
-                <div className="space-y-2">
+              )}
+
+              {/* Pending Providers */}
+              {result.pending_providers && result.pending_providers.length > 0 && (
+                <div className="space-y-2 mt-4">
                   <p className="text-zinc-400 text-sm mb-2">Known Providers (not yet on Dock AI):</p>
                   {result.pending_providers.map((pp, i) => (
                     <div key={i} className="p-3 bg-zinc-950 rounded border border-dashed border-zinc-700">
@@ -283,7 +285,10 @@ export default function Home() {
                     This domain uses these providers, but they haven&apos;t joined Dock AI yet.
                   </p>
                 </div>
-              ) : (
+              )}
+
+              {/* No providers at all */}
+              {result.entities.every(e => e.mcps.length === 0) && (!result.pending_providers || result.pending_providers.length === 0) && (
                 <p className="text-zinc-500 text-sm">No MCP providers found</p>
               )}
             </div>
