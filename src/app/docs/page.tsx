@@ -35,40 +35,6 @@ export default function DocsPage() {
         connect directly to the MCP server.
       </p>
 
-      <h2>Dock AI Extension: Pending Providers</h2>
-
-      <p>
-        Dock AI pre-indexes entities from various sources. When an entity is known to use a provider
-        that hasn&apos;t registered yet, the API returns a <code>pending_providers</code> field.
-      </p>
-
-      <div className="my-4 p-4 bg-zinc-900 border border-zinc-800 rounded-lg">
-        <p className="text-zinc-500 text-sm mb-2">Example response with pending provider:</p>
-        <pre className="text-sm overflow-x-auto">
-{`{
-  "domain": "example-restaurant.com",
-  "entities": [
-    {
-      "name": "Acme Bistro",
-      "path": "/",
-      "mcps": [],
-      "pending_providers": [
-        {
-          "provider_domain": "booking-provider.com",
-          "capabilities": ["reservations"]
-        }
-      ]
-    }
-  ]
-}`}
-        </pre>
-      </div>
-
-      <p className="text-zinc-400 text-sm">
-        This is a <strong className="text-white">Dock AI-specific extension</strong>, not part of the EDP spec.
-        It allows AI agents to inform users when a provider hasn&apos;t joined yet.
-      </p>
-
       <h2>Verification Levels</h2>
 
       <p>Trust is established through a verification system:</p>
@@ -151,7 +117,52 @@ export default function DocsPage() {
 
       <h2>API Reference</h2>
 
-      <p>Base URL: <code>https://api.dockai.co</code></p>
+      <p>Base URL: <code className="text-teal-400">https://api.dockai.co</code></p>
+
+      <h3>GET /v1/resolve/domain/&#123;domain&#125;</h3>
+      <p className="text-zinc-400 text-sm mb-3">Resolve a domain to its MCP endpoints. No authentication required.</p>
+
+      <div className="my-4 p-4 bg-zinc-900 border border-zinc-800 rounded-lg">
+        <p className="text-zinc-500 text-sm mb-2">Response:</p>
+        <pre className="text-sm overflow-x-auto text-zinc-300">
+{`{
+  "domain": "example-restaurant.com",
+  "entities": [
+    {
+      "name": "Acme Bistro",
+      "path": "/",
+      "location": { "city": "Paris", "country": "FR" },
+      "verification_level": 2,
+      "mcps": [
+        {
+          "provider": "booking-provider",
+          "endpoint": "https://mcp.booking-provider.com",
+          "entity_id": "rest-123",
+          "capabilities": ["reservations"],
+          "verification": { "level": 2, "method": "dual_attestation" }
+        }
+      ],
+      "pending_providers": [
+        {
+          "provider_domain": "other-provider.com",
+          "capabilities": ["ordering"]
+        }
+      ]
+    }
+  ]
+}`}
+        </pre>
+      </div>
+
+      <p className="text-zinc-500 text-sm mb-6">
+        <code className="text-zinc-400">pending_providers</code> lists providers detected but not yet registered with Dock AI.
+      </p>
+
+      <h3>POST /v1/submit</h3>
+      <p className="text-zinc-400 text-sm mb-3">Submit a domain to crawl its Entity Card. No authentication required.</p>
+
+      <h3>POST /v1/providers/register</h3>
+      <p className="text-zinc-400 text-sm mb-3">Register entities as an MCP provider. Requires API key. See <Link href="/docs/providers" className="text-teal-400 hover:underline">Provider docs</Link>.</p>
 
       <table className="w-full my-4 text-sm">
         <thead>
