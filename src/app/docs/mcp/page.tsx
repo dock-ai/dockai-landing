@@ -19,14 +19,14 @@ const responseExample = `{
   },
   "mcps": [
     {
-      "provider": "zenchef",
-      "endpoint": "https://mcp.zenchef.com",
+      "provider": "booking-provider",
+      "endpoint": "https://mcp.booking-provider.com",
       "capabilities": ["reservations", "availability"]
     }
   ],
   "claude_desktop_config": {
     "mcpServers": {
-      "zenchef": { "url": "https://mcp.zenchef.com/mcp" }
+      "booking-provider": { "url": "https://mcp.booking-provider.com/mcp" }
     }
   }
 }`
