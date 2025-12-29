@@ -55,7 +55,7 @@ export default function DocsPage() {
           </tr>
           <tr className="border-b border-zinc-800">
             <td className="py-2">1</td>
-            <td className="py-2">Entity Card only</td>
+            <td className="py-2">Entity Card OR Trusted Provider</td>
             <td className="py-2 text-zinc-500">Business claim</td>
           </tr>
           <tr className="border-b border-zinc-800">
