@@ -14,7 +14,7 @@ export default function ApiReferencePage() {
         Base URL: <code>https://api.dockai.co</code>
       </p>
 
-      <div className="my-6 p-4 bg-zinc-900/50 border border-zinc-800 rounded-lg">
+      <div className="my-6 p-4 bg-zinc-900 border border-zinc-800 rounded-lg">
         <table className="w-full text-sm">
           <thead>
             <tr className="border-b border-zinc-800">
