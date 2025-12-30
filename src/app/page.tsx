@@ -111,7 +111,7 @@ export default function Home() {
   }
 
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen flex flex-col">
       {/* Header */}
       <header className="border-b border-zinc-800">
         <div className="max-w-5xl mx-auto px-4 py-4 flex items-center justify-between">
@@ -308,7 +308,7 @@ export default function Home() {
       </section>
 
       {/* Footer */}
-      <footer className="py-8 px-4 border-t border-zinc-800">
+      <footer className="mt-auto py-8 px-4 border-t border-zinc-800">
         <div className="max-w-5xl mx-auto flex items-center justify-between text-sm text-zinc-500">
           <p>Dock AI - First EDP Registry</p>
           <div className="flex gap-4">
