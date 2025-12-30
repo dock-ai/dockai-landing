@@ -227,12 +227,70 @@ export default async function EntityPage({ params }: Params) {
         {/* How to Use */}
         <section className="mb-8">
           <h2 className="text-xl font-semibold mb-4">How to interact</h2>
-          <div className="space-y-4 text-zinc-300">
-            <p>
-              Use any AI assistant that supports the Model Context Protocol (MCP) to interact with {primaryEntity.name}.
-            </p>
+          <div className="space-y-6 text-zinc-300">
+            <div className="p-4 bg-teal-950/20 border border-teal-800/50 rounded-lg">
+              <p className="text-teal-400 font-medium mb-1">Install Dock AI once</p>
+              <p className="text-zinc-400 text-sm">
+                Add Dock AI to your favorite AI assistant and discover any AI-enabled business instantly.
+              </p>
+            </div>
+
+            {/* AI Assistants */}
+            <div className="space-y-3">
+              <p className="text-zinc-400 text-sm font-medium">Supported AI assistants:</p>
+
+              {/* Claude */}
+              <div className="p-3 bg-zinc-900 border border-zinc-800 rounded-lg">
+                <div className="flex items-center justify-between">
+                  <span className="font-medium">Claude Desktop</span>
+                  <a
+                    href="https://support.anthropic.com/en/articles/10949351-getting-started-with-local-mcp-servers-on-claude-desktop"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-xs text-teal-400 hover:text-teal-300"
+                  >
+                    Setup guide →
+                  </a>
+                </div>
+                <p className="text-zinc-500 text-xs mt-1">Settings → Developer → Edit Config</p>
+              </div>
+
+              {/* ChatGPT */}
+              <div className="p-3 bg-zinc-900 border border-zinc-800 rounded-lg">
+                <div className="flex items-center justify-between">
+                  <span className="font-medium">ChatGPT</span>
+                  <a
+                    href="https://platform.openai.com/docs/mcp"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-xs text-teal-400 hover:text-teal-300"
+                  >
+                    Setup guide →
+                  </a>
+                </div>
+                <p className="text-zinc-500 text-xs mt-1">Settings → Connectors → Create (Pro/Plus)</p>
+              </div>
+
+              {/* Mistral */}
+              <div className="p-3 bg-zinc-900 border border-zinc-800 rounded-lg">
+                <div className="flex items-center justify-between">
+                  <span className="font-medium">Mistral Le Chat</span>
+                  <a
+                    href="https://help.mistral.ai/en/articles/393572-configuring-a-custom-connector"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-xs text-teal-400 hover:text-teal-300"
+                  >
+                    Setup guide →
+                  </a>
+                </div>
+                <p className="text-zinc-500 text-xs mt-1">Intelligence → Connectors → Add Connector</p>
+              </div>
+            </div>
+
+            {/* Example prompt */}
             <div className="p-4 bg-zinc-900 border border-zinc-800 rounded-lg font-mono text-sm">
-              <p className="text-zinc-500 mb-2"># Example prompt:</p>
+              <p className="text-zinc-500 mb-2"># Then just ask:</p>
               <p className="text-teal-400">
                 &quot;Book a table at {primaryEntity.name}{location ? ` in ${location}` : ''}&quot;
               </p>
