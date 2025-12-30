@@ -264,7 +264,7 @@ export default function ProvidersPage() {
       <h2>Rate Limits</h2>
 
       <p>
-        The provider registration endpoint is rate-limited to <strong>20 requests per minute</strong>.
+        The provider registration endpoint is rate-limited to <strong>200 requests per minute</strong>.
       </p>
     </div>
   )

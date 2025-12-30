@@ -37,7 +37,7 @@ export default function ApiReferencePage() {
             <tr>
               <td className="py-2 font-mono text-teal-400">POST /v1/providers/register</td>
               <td className="py-2">API Key</td>
-              <td className="py-2">20/min</td>
+              <td className="py-2">200/min</td>
             </tr>
           </tbody>
         </table>
