@@ -34,6 +34,11 @@ export default function ApiReferencePage() {
               <td className="py-2">None</td>
               <td className="py-2">10/min</td>
             </tr>
+            <tr className="border-b border-zinc-800">
+              <td className="py-2 font-mono text-teal-400">POST /v1/providers/sync</td>
+              <td className="py-2">API Key / JWT</td>
+              <td className="py-2">100/min</td>
+            </tr>
             <tr>
               <td className="py-2 font-mono text-teal-400">POST /v1/providers/register</td>
               <td className="py-2">API Key</td>
@@ -242,12 +247,144 @@ Content-Type: application/json
 }`}
       </CodeBlock>
 
-      {/* Provider Registration */}
+      {/* Provider Sync - Full Sync API */}
+      <h2 id="provider-sync">POST /v1/providers/sync</h2>
+
+      <p>
+        <strong>Recommended.</strong> Full sync API - send all your entities, we handle the diff.
+        Entities not in the request are automatically deleted. Max 10,000 entities per request.
+      </p>
+
+      <h3>Authentication</h3>
+
+      <p className="text-zinc-400 text-sm">
+        Two authentication methods are supported:
+      </p>
+
+      <CodeBlock className="my-4">
+{`# Option 1: API Key (for external integrations)
+Authorization: Bearer sk_live_xxxxx
+
+# Option 2: Supabase JWT (from dashboard)
+Authorization: Bearer eyJhbGciOiJIUzI1NiIs...`}
+      </CodeBlock>
+
+      <h3>Request</h3>
+
+      <CodeBlock className="my-4">
+{`POST /v1/providers/sync
+Authorization: Bearer sk_live_xxxxx
+Content-Type: application/json
+
+{
+  "entities": [
+    {
+      "entity_id": "venue-123",
+      "name": "Example Restaurant Paris",
+      "domain": "example-restaurant.com",
+      "path": "/paris",
+      "category": "restaurant",
+      "city": "Paris",
+      "country": "FR",
+      "lat": 48.8566,
+      "lng": 2.3522,
+      "capabilities": ["reservations", "availability"]
+    },
+    {
+      "entity_id": "venue-456",
+      "name": "Example Restaurant Lyon",
+      "city": "Lyon",
+      "country": "FR"
+    }
+  ]
+}`}
+      </CodeBlock>
+
+      <h3>Entity Fields</h3>
+
+      <table className="w-full my-4 text-sm">
+        <thead>
+          <tr className="border-b border-zinc-800">
+            <th className="text-left py-2 text-zinc-400">Field</th>
+            <th className="text-left py-2 text-zinc-400">Required</th>
+            <th className="text-left py-2 text-zinc-400">Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr className="border-b border-zinc-800">
+            <td className="py-2 font-mono">entity_id</td>
+            <td className="py-2">Yes</td>
+            <td className="py-2 text-zinc-400">Your internal identifier</td>
+          </tr>
+          <tr className="border-b border-zinc-800">
+            <td className="py-2 font-mono">name</td>
+            <td className="py-2">Yes</td>
+            <td className="py-2 text-zinc-400">Display name</td>
+          </tr>
+          <tr className="border-b border-zinc-800">
+            <td className="py-2 font-mono">domain</td>
+            <td className="py-2">No</td>
+            <td className="py-2 text-zinc-400">Entity&apos;s website domain</td>
+          </tr>
+          <tr className="border-b border-zinc-800">
+            <td className="py-2 font-mono">path</td>
+            <td className="py-2">No</td>
+            <td className="py-2 text-zinc-400">Path within domain (e.g., /paris)</td>
+          </tr>
+          <tr className="border-b border-zinc-800">
+            <td className="py-2 font-mono">category</td>
+            <td className="py-2">No</td>
+            <td className="py-2 text-zinc-400">Entity category</td>
+          </tr>
+          <tr className="border-b border-zinc-800">
+            <td className="py-2 font-mono">city, country</td>
+            <td className="py-2">No</td>
+            <td className="py-2 text-zinc-400">Location info</td>
+          </tr>
+          <tr className="border-b border-zinc-800">
+            <td className="py-2 font-mono">lat, lng</td>
+            <td className="py-2">No</td>
+            <td className="py-2 text-zinc-400">GPS coordinates</td>
+          </tr>
+          <tr className="border-b border-zinc-800">
+            <td className="py-2 font-mono">capabilities</td>
+            <td className="py-2">No</td>
+            <td className="py-2 text-zinc-400">What your MCP can do</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3>Response</h3>
+
+      <CodeBlock className="my-4">
+{`// 200 OK
+{
+  "success": true,
+  "provider": "sevenrooms",
+  "results": {
+    "total": 2,
+    "created": 1,
+    "updated": 1,
+    "deleted": 5,
+    "unchanged": 0,
+    "errors": 0
+  }
+}`}
+      </CodeBlock>
+
+      <div className="my-6 p-4 bg-zinc-900 border border-zinc-800 rounded-lg">
+        <p className="text-sm text-zinc-400">
+          <strong className="text-white">Full Sync Behavior:</strong> Entities not included in the request
+          are automatically deleted. This ensures your registry stays in sync with your database.
+        </p>
+      </div>
+
+      {/* Provider Registration - Legacy */}
       <h2 id="provider-register">POST /v1/providers/register</h2>
 
       <p>
-        Register or update entities as an MCP provider. Requires authentication via API key.
-        Supports bulk operations (up to 1000 per request).
+        Operations-based API for granular control. Use <code>/v1/providers/sync</code> for simpler integration.
+        Supports upsert and delete operations (up to 1000 per request).
       </p>
 
       <h3>Authentication</h3>

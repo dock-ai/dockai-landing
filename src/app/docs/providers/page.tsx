@@ -3,47 +3,37 @@
 import Link from 'next/link'
 import { CodeBlock } from '@/components/ui/code-block'
 
-const endpointExample = `POST https://api.dockai.co/v1/providers/register
+const syncEndpoint = `POST https://api.dockai.co/v1/providers/sync
 Authorization: Bearer sk_live_xxxxxxxxxxxxx`
 
-const requestExample = `{
-  "operations": [
+const syncRequest = `{
+  "entities": [
     {
-      "action": "upsert",
-      "entity": {
-        "entity_id": "rest-123",
-        "domain": "example-restaurant.com",
-        "name": "Example Restaurant",
-        "category": "restaurant",
-        "location": {
-          "city": "Paris",
-          "country": "FR"
-        }
-      }
+      "entity_id": "rest-123",
+      "name": "Example Restaurant Paris",
+      "domain": "example-restaurant.com",
+      "category": "restaurant",
+      "city": "Paris",
+      "country": "FR"
     },
     {
-      "action": "upsert",
-      "entity": {
-        "entity_id": "rest-456",
-        "name": "Another Restaurant",
-        "category": "restaurant"
-      }
-    },
-    {
-      "action": "delete",
-      "entity_id": "old-entity-789"
+      "entity_id": "rest-456",
+      "name": "Another Restaurant",
+      "category": "restaurant",
+      "city": "Lyon"
     }
   ]
 }`
 
-const responseExample = `{
+const syncResponse = `{
   "success": true,
   "provider": "your-provider-id",
   "results": {
-    "total": 3,
+    "total": 2,
     "created": 1,
     "updated": 1,
-    "deleted": 1,
+    "deleted": 3,
+    "unchanged": 0,
     "errors": 0
   }
 }`
@@ -88,120 +78,92 @@ export default function ProvidersPage() {
         <li>Start registering entities</li>
       </ol>
 
-      <h2>Provider Registration API</h2>
+      <h2>Full Sync API</h2>
 
-      <CodeBlock className="my-4">{endpointExample}</CodeBlock>
+      <p className="text-zinc-400 my-4">
+        Send all your entities in one request. We handle the diff automatically:
+        new entities are created, existing ones updated, and missing ones deleted.
+      </p>
+
+      <CodeBlock className="my-4">{syncEndpoint}</CodeBlock>
 
       <h3>Request Body</h3>
 
-      <CodeBlock className="my-4">{requestExample}</CodeBlock>
+      <CodeBlock className="my-4">{syncRequest}</CodeBlock>
 
-      <h2>Operations</h2>
-
-      <p className="text-zinc-400 my-4">
-        Each request contains an array of operations. Max <strong>1000 operations</strong> per request.
-      </p>
-
-      <h3>Upsert Operation</h3>
-
-      <p className="text-zinc-400 my-2">Create or update an entity:</p>
+      <h3>Entity Fields</h3>
 
       <table className="w-full my-4 text-sm">
         <thead>
           <tr className="border-b border-zinc-800">
             <th className="text-left py-2 text-zinc-400">Field</th>
-            <th className="text-left py-2 text-zinc-400">Type</th>
             <th className="text-left py-2 text-zinc-400">Required</th>
             <th className="text-left py-2 text-zinc-400">Description</th>
           </tr>
         </thead>
         <tbody>
           <tr className="border-b border-zinc-800">
-            <td className="py-2 font-mono">action</td>
-            <td className="py-2">string</td>
-            <td className="py-2">Yes</td>
-            <td className="py-2 text-zinc-400">&quot;upsert&quot;</td>
-          </tr>
-          <tr className="border-b border-zinc-800">
-            <td className="py-2 font-mono">entity.entity_id</td>
-            <td className="py-2">string</td>
+            <td className="py-2 font-mono">entity_id</td>
             <td className="py-2">Yes</td>
             <td className="py-2 text-zinc-400">Your internal ID</td>
           </tr>
           <tr className="border-b border-zinc-800">
-            <td className="py-2 font-mono">entity.domain</td>
-            <td className="py-2">string</td>
-            <td className="py-2">No</td>
-            <td className="py-2 text-zinc-400">Entity&apos;s domain (if they have one)</td>
-          </tr>
-          <tr className="border-b border-zinc-800">
-            <td className="py-2 font-mono">entity.name</td>
-            <td className="py-2">string</td>
+            <td className="py-2 font-mono">name</td>
             <td className="py-2">Yes</td>
             <td className="py-2 text-zinc-400">Display name</td>
           </tr>
           <tr className="border-b border-zinc-800">
-            <td className="py-2 font-mono">entity.category</td>
-            <td className="py-2">string</td>
+            <td className="py-2 font-mono">domain</td>
+            <td className="py-2">No</td>
+            <td className="py-2 text-zinc-400">Entity&apos;s website domain</td>
+          </tr>
+          <tr className="border-b border-zinc-800">
+            <td className="py-2 font-mono">path</td>
+            <td className="py-2">No</td>
+            <td className="py-2 text-zinc-400">Path within domain (e.g., /paris)</td>
+          </tr>
+          <tr className="border-b border-zinc-800">
+            <td className="py-2 font-mono">category</td>
             <td className="py-2">No</td>
             <td className="py-2 text-zinc-400">e.g., restaurant, hotel, salon</td>
           </tr>
           <tr className="border-b border-zinc-800">
-            <td className="py-2 font-mono">entity.capabilities</td>
-            <td className="py-2">string[]</td>
+            <td className="py-2 font-mono">city, country</td>
             <td className="py-2">No</td>
-            <td className="py-2 text-zinc-400">Override provider capabilities</td>
+            <td className="py-2 text-zinc-400">Location info</td>
           </tr>
           <tr className="border-b border-zinc-800">
-            <td className="py-2 font-mono">entity.location</td>
-            <td className="py-2">object</td>
+            <td className="py-2 font-mono">lat, lng</td>
             <td className="py-2">No</td>
-            <td className="py-2 text-zinc-400">city, country, coordinates</td>
+            <td className="py-2 text-zinc-400">GPS coordinates</td>
+          </tr>
+          <tr className="border-b border-zinc-800">
+            <td className="py-2 font-mono">capabilities</td>
+            <td className="py-2">No</td>
+            <td className="py-2 text-zinc-400">What your MCP can do for this entity</td>
           </tr>
         </tbody>
       </table>
 
-      <h3>Delete Operation</h3>
-
-      <p className="text-zinc-400 my-2">Remove an entity by its entity_id:</p>
-
-      <table className="w-full my-4 text-sm">
-        <thead>
-          <tr className="border-b border-zinc-800">
-            <th className="text-left py-2 text-zinc-400">Field</th>
-            <th className="text-left py-2 text-zinc-400">Type</th>
-            <th className="text-left py-2 text-zinc-400">Required</th>
-            <th className="text-left py-2 text-zinc-400">Description</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr className="border-b border-zinc-800">
-            <td className="py-2 font-mono">action</td>
-            <td className="py-2">string</td>
-            <td className="py-2">Yes</td>
-            <td className="py-2 text-zinc-400">&quot;delete&quot;</td>
-          </tr>
-          <tr className="border-b border-zinc-800">
-            <td className="py-2 font-mono">entity_id</td>
-            <td className="py-2">string</td>
-            <td className="py-2">Yes</td>
-            <td className="py-2 text-zinc-400">The entity_id to delete</td>
-          </tr>
-        </tbody>
-      </table>
-
-      <h2>Pagination</h2>
+      <h2>Limits</h2>
 
       <div className="my-6 p-4 bg-zinc-900 border border-zinc-800 rounded-lg">
         <p className="text-sm text-zinc-400">
-          <strong className="text-white">Max 1000 operations per request.</strong><br />
-          For larger imports, split your data into batches and send multiple requests.
+          <strong className="text-white">Max 10,000 entities per request.</strong><br />
+          For larger imports, split your data into batches.
         </p>
       </div>
 
       <h2>Response</h2>
 
-      <CodeBlock className="my-4">{responseExample}</CodeBlock>
+      <CodeBlock className="my-4">{syncResponse}</CodeBlock>
+
+      <div className="my-6 p-4 bg-teal-900/30 border border-teal-800 rounded-lg">
+        <p className="text-sm text-zinc-300">
+          <strong className="text-teal-400">Full Sync Behavior:</strong> Entities not in the request
+          are automatically deleted. This keeps your registry in sync with your database.
+        </p>
+      </div>
 
       <h2 id="verification-levels">Verification Levels</h2>
 
@@ -264,7 +226,18 @@ export default function ProvidersPage() {
       <h2>Rate Limits</h2>
 
       <p>
-        The provider registration endpoint is rate-limited to <strong>200 requests per minute</strong>.
+        The sync endpoint is rate-limited to <strong>100 requests per minute</strong>.
+      </p>
+
+      <h2>Alternative: Operations API</h2>
+
+      <p className="text-zinc-400 my-4">
+        For granular control over individual entities, use the{' '}
+        <Link href="/docs/api#provider-register" className="text-teal-400 hover:underline">
+          operations API
+        </Link>{' '}
+        with upsert/delete actions. This is useful when you only need to update a few entities
+        without re-syncing the entire list.
       </p>
     </div>
   )
