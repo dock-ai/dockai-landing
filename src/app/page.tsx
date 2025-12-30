@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { Button } from '@/components/ui/button'
@@ -44,11 +44,39 @@ interface ResolveResult {
   entities: EntityResult[]
 }
 
+const businessTypes = [
+  'restaurant',
+  'fitness studio',
+  'hair salon',
+  'clinic',
+  'hotel',
+  'spa',
+  'garage',
+  'dentist',
+  'barbershop',
+  'yoga studio',
+]
+
 export default function Home() {
   const [domain, setDomain] = useState('')
   const [loading, setLoading] = useState(false)
   const [result, setResult] = useState<ResolveResult | null>(null)
   const [error, setError] = useState<string | null>(null)
+
+  // Animated business type
+  const [businessIndex, setBusinessIndex] = useState(0)
+  const [isAnimating, setIsAnimating] = useState(false)
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setIsAnimating(true)
+      setTimeout(() => {
+        setBusinessIndex((prev) => (prev + 1) % businessTypes.length)
+        setIsAnimating(false)
+      }, 200)
+    }, 2500)
+    return () => clearInterval(interval)
+  }, [])
 
   // Submit state
   const [submitDomain, setSubmitDomain] = useState('')
@@ -137,7 +165,15 @@ export default function Home() {
       <section className="py-20 px-4">
         <div className="max-w-3xl mx-auto text-center">
           <h1 className="text-4xl md:text-5xl font-bold mb-4">
-            Which MCP serves this business?
+            Which MCP serves this{' '}
+            <span
+              className={`text-teal-400 inline-block transition-all duration-200 ${
+                isAnimating ? 'opacity-0 translate-y-2' : 'opacity-100 translate-y-0'
+              }`}
+            >
+              {businessTypes[businessIndex]}
+            </span>
+            ?
           </h1>
           <p className="text-xl text-zinc-400 mb-8">
             Discover which MCP servers can interact with any entity.
