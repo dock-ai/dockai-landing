@@ -233,59 +233,77 @@ export default async function EntityPage({ params }: Params) {
               <p className="text-zinc-400 text-sm">
                 Add Dock AI to your favorite AI assistant and discover any AI-enabled business instantly.
               </p>
+              <div className="mt-3 p-2 bg-zinc-900/50 rounded font-mono text-xs text-zinc-300">
+                MCP Server URL: <span className="text-teal-400">https://mcp.dockai.co</span>
+              </div>
             </div>
 
             {/* AI Assistants */}
-            <div className="space-y-3">
-              <p className="text-zinc-400 text-sm font-medium">Supported AI assistants:</p>
+            <div className="space-y-4">
+              <p className="text-zinc-400 text-sm font-medium">Setup instructions:</p>
 
               {/* Claude */}
-              <div className="p-3 bg-zinc-900 border border-zinc-800 rounded-lg">
-                <div className="flex items-center justify-between">
-                  <span className="font-medium">Claude Desktop</span>
-                  <a
-                    href="https://support.anthropic.com/en/articles/10949351-getting-started-with-local-mcp-servers-on-claude-desktop"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-xs text-teal-400 hover:text-teal-300"
-                  >
-                    Setup guide →
-                  </a>
+              <details className="group">
+                <summary className="p-3 bg-zinc-900 border border-zinc-800 rounded-lg cursor-pointer hover:bg-zinc-800/50 list-none">
+                  <div className="flex items-center justify-between">
+                    <span className="font-medium">Claude</span>
+                    <span className="text-xs text-zinc-500 group-open:hidden">Click to expand</span>
+                    <span className="text-xs text-zinc-500 hidden group-open:inline">Click to collapse</span>
+                  </div>
+                </summary>
+                <div className="mt-2 p-4 bg-zinc-900/50 border border-zinc-800 rounded-lg text-sm space-y-2">
+                  <p className="text-zinc-400">Pro / Max plans:</p>
+                  <ol className="list-decimal list-inside space-y-1 text-zinc-300">
+                    <li>Go to <span className="text-teal-400">Settings → Connectors</span></li>
+                    <li>Click <span className="text-teal-400">Add custom connector</span></li>
+                    <li>Enter URL: <code className="text-teal-400 bg-zinc-800 px-1 rounded">https://mcp.dockai.co</code></li>
+                    <li>Click <span className="text-teal-400">Add</span></li>
+                  </ol>
                 </div>
-                <p className="text-zinc-500 text-xs mt-1">Settings → Developer → Edit Config</p>
-              </div>
+              </details>
 
               {/* ChatGPT */}
-              <div className="p-3 bg-zinc-900 border border-zinc-800 rounded-lg">
-                <div className="flex items-center justify-between">
-                  <span className="font-medium">ChatGPT</span>
-                  <a
-                    href="https://platform.openai.com/docs/mcp"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-xs text-teal-400 hover:text-teal-300"
-                  >
-                    Setup guide →
-                  </a>
+              <details className="group">
+                <summary className="p-3 bg-zinc-900 border border-zinc-800 rounded-lg cursor-pointer hover:bg-zinc-800/50 list-none">
+                  <div className="flex items-center justify-between">
+                    <span className="font-medium">ChatGPT</span>
+                    <span className="text-xs text-zinc-500 group-open:hidden">Click to expand</span>
+                    <span className="text-xs text-zinc-500 hidden group-open:inline">Click to collapse</span>
+                  </div>
+                </summary>
+                <div className="mt-2 p-4 bg-zinc-900/50 border border-zinc-800 rounded-lg text-sm space-y-2">
+                  <p className="text-zinc-400">Plus / Pro / Business plans:</p>
+                  <ol className="list-decimal list-inside space-y-1 text-zinc-300">
+                    <li>Go to <span className="text-teal-400">Settings → Apps</span></li>
+                    <li>Enable <span className="text-teal-400">Developer mode</span> in Advanced settings</li>
+                    <li>Click <span className="text-teal-400">Create</span> under Connectors</li>
+                    <li>Enter URL: <code className="text-teal-400 bg-zinc-800 px-1 rounded">https://mcp.dockai.co</code></li>
+                    <li>Add name &quot;Dock AI&quot; and click <span className="text-teal-400">Create</span></li>
+                  </ol>
                 </div>
-                <p className="text-zinc-500 text-xs mt-1">Settings → Connectors → Create (Pro/Plus)</p>
-              </div>
+              </details>
 
               {/* Mistral */}
-              <div className="p-3 bg-zinc-900 border border-zinc-800 rounded-lg">
-                <div className="flex items-center justify-between">
-                  <span className="font-medium">Mistral Le Chat</span>
-                  <a
-                    href="https://help.mistral.ai/en/articles/393572-configuring-a-custom-connector"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-xs text-teal-400 hover:text-teal-300"
-                  >
-                    Setup guide →
-                  </a>
+              <details className="group">
+                <summary className="p-3 bg-zinc-900 border border-zinc-800 rounded-lg cursor-pointer hover:bg-zinc-800/50 list-none">
+                  <div className="flex items-center justify-between">
+                    <span className="font-medium">Mistral Le Chat</span>
+                    <span className="text-xs text-zinc-500 group-open:hidden">Click to expand</span>
+                    <span className="text-xs text-zinc-500 hidden group-open:inline">Click to collapse</span>
+                  </div>
+                </summary>
+                <div className="mt-2 p-4 bg-zinc-900/50 border border-zinc-800 rounded-lg text-sm space-y-2">
+                  <p className="text-zinc-400">All plans:</p>
+                  <ol className="list-decimal list-inside space-y-1 text-zinc-300">
+                    <li>Click <span className="text-teal-400">Intelligence → Connectors</span></li>
+                    <li>Click <span className="text-teal-400">+ Add Connector</span></li>
+                    <li>Select <span className="text-teal-400">Custom MCP Connector</span> tab</li>
+                    <li>Name: <code className="text-teal-400 bg-zinc-800 px-1 rounded">dockai</code></li>
+                    <li>URL: <code className="text-teal-400 bg-zinc-800 px-1 rounded">https://mcp.dockai.co</code></li>
+                    <li>Click <span className="text-teal-400">Connect</span></li>
+                  </ol>
                 </div>
-                <p className="text-zinc-500 text-xs mt-1">Intelligence → Connectors → Add Connector</p>
-              </div>
+              </details>
             </div>
 
             {/* Example prompt */}
