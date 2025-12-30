@@ -203,7 +203,13 @@ export default function ProvidersPage() {
 
       <CodeBlock className="my-4">{responseExample}</CodeBlock>
 
-      <h2>Verification Levels</h2>
+      <h2 id="verification-levels">Verification Levels</h2>
+
+      <p className="text-zinc-400 my-4">
+        AI agents need to trust the MCP endpoints they connect to. Verification levels help agents
+        assess how confident they can be that an entity is genuinely served by your MCP. Higher levels
+        mean stronger proof of the relationship between the entity and the provider.
+      </p>
 
       <table className="w-full my-4 text-sm">
         <thead>
