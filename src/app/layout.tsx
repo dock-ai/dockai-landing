@@ -14,21 +14,21 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Dock AI - The Action Layer for AI",
-  description: "Connect your business to AI assistants. Dock AI enables restaurants, salons, clinics, and service businesses to be discovered and booked through AI agents using the Model Context Protocol (MCP).",
-  keywords: ["AI booking", "MCP server", "Model Context Protocol", "AI assistant integration", "restaurant AI", "business AI", "entity discovery protocol", "agentic AI", "AI actions"],
+  title: "Dock AI - AI can find you. Let it act.",
+  description: "The first Entity Discovery Protocol registry. Dock AI helps AI agents discover which MCP servers can interact with any business - restaurants, salons, clinics, and more.",
+  keywords: ["EDP registry", "entity discovery protocol", "MCP server", "Model Context Protocol", "AI agent", "MCP discovery", "business AI", "agentic AI"],
   authors: [{ name: "Dock AI" }],
   openGraph: {
-    title: "Dock AI - The Action Layer for AI",
-    description: "Connect your business to AI assistants. Enable booking, ordering, and more through natural language.",
+    title: "Dock AI - AI can find you. Let it act.",
+    description: "The first Entity Discovery Protocol registry. Discover which MCP servers can interact with any business.",
     url: "https://dockai.co",
     siteName: "Dock AI",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Dock AI - The Action Layer for AI",
-    description: "Connect your business to AI assistants. Enable booking, ordering, and more through natural language.",
+    title: "Dock AI - AI can find you. Let it act.",
+    description: "The first Entity Discovery Protocol registry. Discover which MCP servers can interact with any business.",
   },
   alternates: {
     canonical: "https://dockai.co",

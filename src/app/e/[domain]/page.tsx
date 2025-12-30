@@ -277,7 +277,7 @@ export default async function EntityPage({ params }: Params) {
       {/* Footer */}
       <footer className="border-t border-zinc-800 mt-12">
         <div className="max-w-4xl mx-auto px-4 py-8 text-center text-zinc-500 text-sm">
-          <p>Dock AI - The Action Layer for AI</p>
+          <p>Dock AI - AI can find you. Let it act.</p>
           <p className="mt-2">
             <Link href="/" className="hover:text-teal-400">Home</Link>
             {' · '}
