@@ -139,14 +139,18 @@ export default function InstallPage() {
                   <div className="w-8 h-8 bg-zinc-800 rounded-full flex items-center justify-center text-sm font-bold text-teal-400 shrink-0">3</div>
                   <div>
                     <p className="text-white font-medium">Configure the connector</p>
-                    <div className="mt-2 space-y-2 text-sm">
-                      <div className="flex gap-2">
-                        <span className="text-zinc-500 w-32">Name:</span>
-                        <code className="text-teal-400">dock-ai</code>
+                    <div className="mt-3 space-y-3">
+                      <div>
+                        <span className="text-zinc-500 text-sm">Name:</span>
+                        <pre className="mt-1 bg-zinc-950 border border-zinc-800 rounded-lg p-3 text-sm">
+                          <code className="text-teal-400">dock-ai</code>
+                        </pre>
                       </div>
-                      <div className="flex gap-2">
-                        <span className="text-zinc-500 w-32">Server URL:</span>
-                        <code className="text-teal-400">https://mcp.dockai.co</code>
+                      <div>
+                        <span className="text-zinc-500 text-sm">Server URL:</span>
+                        <pre className="mt-1 bg-zinc-950 border border-zinc-800 rounded-lg p-3 text-sm">
+                          <code className="text-teal-400">https://mcp.dockai.co</code>
+                        </pre>
                       </div>
                     </div>
                   </div>
