@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
+import { Upload, Link2, Bot } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Card, CardContent } from '@/components/ui/card'
@@ -289,6 +290,53 @@ export default function Home() {
         </div>
       </section>
 
+      {/* For Providers */}
+      <section className="py-16 px-4 border-t border-zinc-800">
+        <div className="max-w-3xl mx-auto">
+          <div className="text-center mb-8">
+            <p className="text-teal-400 text-sm font-medium mb-2">For Providers</p>
+            <h2 className="text-2xl font-bold">Your clients, AI-ready</h2>
+            <p className="text-zinc-400 mt-2">Import your clients and AI will know to use your connector</p>
+          </div>
+
+          <Card className="bg-zinc-900 border-zinc-800">
+            <CardContent className="p-8">
+              <div className="grid md:grid-cols-3 gap-6 mb-8">
+                <div className="text-center">
+                  <div className="w-12 h-12 bg-zinc-800 rounded-xl flex items-center justify-center mx-auto mb-3">
+                    <Upload className="w-6 h-6 text-teal-400" />
+                  </div>
+                  <h3 className="font-medium text-white mb-1">Import</h3>
+                  <p className="text-zinc-500 text-sm">Upload your client list via CSV or API</p>
+                </div>
+                <div className="text-center">
+                  <div className="w-12 h-12 bg-zinc-800 rounded-xl flex items-center justify-center mx-auto mb-3">
+                    <Link2 className="w-6 h-6 text-teal-400" />
+                  </div>
+                  <h3 className="font-medium text-white mb-1">Connect</h3>
+                  <p className="text-zinc-500 text-sm">Link them to your MCP endpoint</p>
+                </div>
+                <div className="text-center">
+                  <div className="w-12 h-12 bg-zinc-800 rounded-xl flex items-center justify-center mx-auto mb-3">
+                    <Bot className="w-6 h-6 text-teal-400" />
+                  </div>
+                  <h3 className="font-medium text-white mb-1">Discover</h3>
+                  <p className="text-zinc-500 text-sm">AI agents find your connector automatically</p>
+                </div>
+              </div>
+
+              <div className="text-center">
+                <Link href="/providers">
+                  <Button className="bg-teal-600 hover:bg-teal-500 cursor-pointer">
+                    Register as a Provider
+                  </Button>
+                </Link>
+              </div>
+            </CardContent>
+          </Card>
+        </div>
+      </section>
+
       {/* For Businesses */}
       <section className="py-16 px-4 border-t border-zinc-800">
         <div className="max-w-3xl mx-auto">
@@ -340,53 +388,6 @@ export default function Home() {
               </Card>
             </TabsContent>
           </Tabs>
-        </div>
-      </section>
-
-      {/* For Providers */}
-      <section className="py-16 px-4 border-t border-zinc-800">
-        <div className="max-w-3xl mx-auto">
-          <div className="text-center mb-8">
-            <p className="text-teal-400 text-sm font-medium mb-2">For Providers</p>
-            <h2 className="text-2xl font-bold">Your clients, AI-ready</h2>
-            <p className="text-zinc-400 mt-2">Import your clients and AI will know to use your connector</p>
-          </div>
-
-          <Card className="bg-zinc-900 border-zinc-800">
-            <CardContent className="p-8">
-              <div className="grid md:grid-cols-3 gap-6 mb-8">
-                <div className="text-center">
-                  <div className="w-12 h-12 bg-zinc-800 rounded-xl flex items-center justify-center mx-auto mb-3">
-                    <span className="text-2xl">📤</span>
-                  </div>
-                  <h3 className="font-medium text-white mb-1">Import</h3>
-                  <p className="text-zinc-500 text-sm">Upload your client list via CSV or API</p>
-                </div>
-                <div className="text-center">
-                  <div className="w-12 h-12 bg-zinc-800 rounded-xl flex items-center justify-center mx-auto mb-3">
-                    <span className="text-2xl">🔗</span>
-                  </div>
-                  <h3 className="font-medium text-white mb-1">Connect</h3>
-                  <p className="text-zinc-500 text-sm">Link them to your MCP endpoint</p>
-                </div>
-                <div className="text-center">
-                  <div className="w-12 h-12 bg-zinc-800 rounded-xl flex items-center justify-center mx-auto mb-3">
-                    <span className="text-2xl">🤖</span>
-                  </div>
-                  <h3 className="font-medium text-white mb-1">Discover</h3>
-                  <p className="text-zinc-500 text-sm">AI agents find your connector automatically</p>
-                </div>
-              </div>
-
-              <div className="text-center">
-                <Link href="/providers">
-                  <Button className="bg-teal-600 hover:bg-teal-500 cursor-pointer">
-                    Register as a Provider
-                  </Button>
-                </Link>
-              </div>
-            </CardContent>
-          </Card>
         </div>
       </section>
 
