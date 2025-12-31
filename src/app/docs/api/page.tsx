@@ -252,8 +252,20 @@ Content-Type: application/json
 
       <p>
         <strong>Recommended.</strong> Full sync API - send all your entities, we handle the diff.
-        Entities not in the request are automatically deleted. Max 10,000 entities per request.
+        Entities not in the request are automatically deleted.
       </p>
+
+      <div className="my-4 p-4 bg-zinc-900 border border-zinc-800 rounded-lg space-y-2">
+        <p className="text-sm text-zinc-400">
+          <strong className="text-white">≤1,000 entities:</strong> Synchronous processing
+        </p>
+        <p className="text-sm text-zinc-400">
+          <strong className="text-white">&gt;1,000 entities:</strong> Async background job (poll for status)
+        </p>
+        <p className="text-sm text-teal-400">
+          <strong>No limit</strong> on entity count. Import 50K+ in one request.
+        </p>
+      </div>
 
       <h3>Authentication</h3>
 
@@ -357,18 +369,47 @@ Content-Type: application/json
       <h3>Response</h3>
 
       <CodeBlock className="my-4">
-{`// 200 OK
+{`// Synchronous (≤1,000 entities)
 {
   "success": true,
+  "async": false,
   "provider": "sevenrooms",
   "results": {
-    "total": 2,
-    "created": 1,
-    "updated": 1,
-    "deleted": 5,
+    "total": 500,
+    "created": 100,
+    "updated": 350,
+    "deleted": 50,
     "unchanged": 0,
     "errors": 0
   }
+}
+
+// Asynchronous (>1,000 entities)
+{
+  "async": true,
+  "job_id": "550e8400-e29b-41d4-a716-446655440000",
+  "status": "pending",
+  "total_entities": 50000,
+  "message": "Processing 50,000 entities in background..."
+}`}
+      </CodeBlock>
+
+      <h3>Polling Job Status</h3>
+
+      <p className="text-zinc-400 text-sm my-2">
+        For async jobs, poll <code className="text-teal-400">GET /v1/providers/sync?job_id=...</code> until complete:
+      </p>
+
+      <CodeBlock className="my-4">
+{`{
+  "job_id": "550e8400-e29b-41d4-a716-446655440000",
+  "status": "processing",  // pending | processing | completed | failed
+  "total_entities": 50000,
+  "processed_entities": 25000,
+  "created": 5000,
+  "updated": 20000,
+  "deleted": 100,
+  "errors": 0
 }`}
       </CodeBlock>
 

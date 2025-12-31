@@ -25,17 +25,40 @@ const syncRequest = `{
   ]
 }`
 
-const syncResponse = `{
+const syncResponse = `// Synchronous response (≤1,000 entities)
+{
   "success": true,
+  "async": false,
   "provider": "your-provider-id",
   "results": {
-    "total": 2,
-    "created": 1,
-    "updated": 1,
-    "deleted": 3,
+    "total": 500,
+    "created": 100,
+    "updated": 400,
+    "deleted": 50,
     "unchanged": 0,
     "errors": 0
   }
+}
+
+// Asynchronous response (>1,000 entities)
+{
+  "async": true,
+  "job_id": "550e8400-e29b-41d4-a716-446655440000",
+  "status": "pending",
+  "total_entities": 50000,
+  "message": "Processing 50,000 entities in background. Poll GET /v1/providers/sync?job_id=... for status."
+}`
+
+const jobStatusResponse = `// GET /v1/providers/sync?job_id=550e8400-e29b-41d4-a716-446655440000
+{
+  "job_id": "550e8400-e29b-41d4-a716-446655440000",
+  "status": "processing",  // pending | processing | completed | failed
+  "total_entities": 50000,
+  "processed_entities": 25000,
+  "created": 5000,
+  "updated": 20000,
+  "deleted": 100,
+  "errors": 0
 }`
 
 const entityCardTemplate = `{
@@ -145,18 +168,33 @@ export default function ProvidersPage() {
         </tbody>
       </table>
 
-      <h2>Limits</h2>
+      <h2>Processing Modes</h2>
 
-      <div className="my-6 p-4 bg-zinc-900 border border-zinc-800 rounded-lg">
+      <div className="my-6 p-4 bg-zinc-900 border border-zinc-800 rounded-lg space-y-3">
         <p className="text-sm text-zinc-400">
-          <strong className="text-white">Max 10,000 entities per request.</strong><br />
-          For larger imports, split your data into batches.
+          <strong className="text-white">≤1,000 entities:</strong> Processed synchronously. Response includes full results.
+        </p>
+        <p className="text-sm text-zinc-400">
+          <strong className="text-white">&gt;1,000 entities:</strong> Processed asynchronously via background job.
+          Response includes a <code className="text-teal-400">job_id</code> to poll for status.
+        </p>
+        <p className="text-sm text-teal-400">
+          <strong>No limit</strong> on the number of entities. Import 50K, 100K, or more in a single request.
         </p>
       </div>
 
       <h2>Response</h2>
 
       <CodeBlock className="my-4">{syncResponse}</CodeBlock>
+
+      <h3>Polling Job Status (async)</h3>
+
+      <p className="text-zinc-400 my-4">
+        For large imports, poll the job status until <code className="text-teal-400">status</code> is
+        <code className="text-teal-400">completed</code> or <code className="text-teal-400">failed</code>.
+      </p>
+
+      <CodeBlock className="my-4">{jobStatusResponse}</CodeBlock>
 
       <div className="my-6 p-4 bg-teal-900/30 border border-teal-800 rounded-lg">
         <p className="text-sm text-zinc-300">
