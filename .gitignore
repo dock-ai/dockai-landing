@@ -39,3 +39,16 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# linkedin content
+/linkedin-content
+
+# private diagrams & visuals
+/src/app/diagrams
+/src/app/visuals
+/src/components/mermaid-diagram.tsx
+
+# pitch deck
+/pitch-deck
+/src/app/pitch
+/public/pitch

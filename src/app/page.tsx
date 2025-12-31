@@ -148,6 +148,9 @@ export default function Home() {
             Dock AI
           </Link>
           <nav className="flex items-center gap-6">
+            <Link href="/install" className="text-sm text-zinc-400 hover:text-white">
+              Install Connector
+            </Link>
             <Link href="/docs" className="text-sm text-zinc-400 hover:text-white">
               Docs
             </Link>
@@ -155,7 +158,7 @@ export default function Home() {
               href="/providers"
               className="text-sm text-teal-400 hover:text-teal-300"
             >
-              For MCP Providers
+              For Providers
             </Link>
           </nav>
         </div>
