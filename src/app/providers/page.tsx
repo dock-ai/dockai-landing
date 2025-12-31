@@ -53,8 +53,17 @@ export default function ProvidersPage() {
             Dock AI
           </Link>
           <nav className="flex items-center gap-6">
-            <Link href="/docs" className="text-sm text-zinc-400 hover:text-white">
+            <Link href="/install" className="text-sm text-zinc-400 hover:text-white cursor-pointer">
+              Install Connector
+            </Link>
+            <Link href="/docs" className="text-sm text-zinc-400 hover:text-white cursor-pointer">
               Docs
+            </Link>
+            <Link
+              href="/providers"
+              className="text-sm text-teal-400 hover:text-teal-300 cursor-pointer"
+            >
+              For Providers
             </Link>
           </nav>
         </div>
