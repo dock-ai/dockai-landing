@@ -78,28 +78,6 @@ export default function ProvidersPage() {
             We&apos;re currently onboarding providers manually to ensure quality.
           </p>
 
-          {/* Benefits */}
-          <div className="grid gap-4 mb-12">
-            <div className="p-4 bg-zinc-900 border border-zinc-800 rounded-lg">
-              <h3 className="text-white font-medium mb-1">Entity Discovery</h3>
-              <p className="text-zinc-400 text-sm">
-                AI agents can discover which businesses use your MCP server.
-              </p>
-            </div>
-            <div className="p-4 bg-zinc-900 border border-zinc-800 rounded-lg">
-              <h3 className="text-white font-medium mb-1">Verification</h3>
-              <p className="text-zinc-400 text-sm">
-                Build trust with dual attestation verification (Level 2).
-              </p>
-            </div>
-            <div className="p-4 bg-zinc-900 border border-zinc-800 rounded-lg">
-              <h3 className="text-white font-medium mb-1">Bulk Registration</h3>
-              <p className="text-zinc-400 text-sm">
-                Register thousands of entities via our API (up to 1000 per request).
-              </p>
-            </div>
-          </div>
-
           {/* Contact Form */}
           <Card className="bg-zinc-900 border-zinc-800">
             <CardContent className="p-6">

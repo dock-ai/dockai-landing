@@ -126,9 +126,12 @@ export default function Home() {
       if (!res.ok) {
         setSubmitResult({ success: false, message: data.error || 'Failed to submit' })
       } else {
+        const entity = data.entities?.[0] || data.entity
         setSubmitResult({
           success: true,
-          message: `Indexed! Verification Level: ${data.entity.verification_level}`,
+          message: entity
+            ? `Indexed! Verification Level: ${entity.verification_level}`
+            : 'Domain indexed successfully!',
         })
       }
     } catch {
@@ -437,7 +440,7 @@ export default function Home() {
                 <span className="text-zinc-500 group-open:rotate-180 transition-transform">▼</span>
               </summary>
               <div className="px-4 pb-4 text-zinc-400 text-sm">
-                Create an account on our <Link href="/providers" className="text-teal-400 hover:underline">provider portal</Link>,
+                Create an account on our <a href="https://provider.dockai.co" className="text-teal-400 hover:underline">provider portal</a>,
                 verify your domain, then import your client list via CSV or API. Once imported, AI agents will know to use your
                 connector when users want to interact with any of your clients.
               </div>
@@ -450,7 +453,6 @@ export default function Home() {
               </summary>
               <div className="px-4 pb-4 text-zinc-400 text-sm">
                 Yes, Dock AI is free for businesses to register and for AI agents to query.
-                For providers with large client lists, we offer premium features like priority support and advanced analytics.
               </div>
             </details>
           </div>
