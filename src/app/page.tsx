@@ -168,7 +168,8 @@ export default function Home() {
       <section className="py-20 px-4">
         <div className="max-w-3xl mx-auto text-center">
           <h1 className="text-4xl md:text-5xl font-bold mb-4">
-            Which MCP serves this{' '}
+            Which connector serves this
+            <br />
             <span
               className={`text-teal-400 inline-block transition-all duration-200 ${
                 isAnimating ? 'opacity-0 translate-y-2' : 'opacity-100 translate-y-0'
@@ -179,18 +180,9 @@ export default function Home() {
             ?
           </h1>
           <p className="text-xl text-zinc-400 mb-8">
-            Discover which MCP servers can interact with any entity.
+            AI agents need to know which app can book, order, or manage for any business.
             <br />
-            The first{' '}
-            <a
-              href="https://github.com/edp-protocol/entity-discovery-protocol"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-teal-400 hover:underline"
-            >
-              Entity Discovery Protocol
-            </a>{' '}
-            registry.
+            Dock AI is the registry that tells them.
           </p>
 
           {/* Search */}
@@ -296,10 +288,14 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Tools Section */}
+      {/* For Businesses */}
       <section className="py-16 px-4 border-t border-zinc-800">
         <div className="max-w-3xl mx-auto">
-          <h2 className="text-2xl font-bold text-center mb-8">Get Started</h2>
+          <div className="text-center mb-8">
+            <p className="text-teal-400 text-sm font-medium mb-2">For Businesses</p>
+            <h2 className="text-2xl font-bold">Make your business AI-discoverable</h2>
+            <p className="text-zinc-400 mt-2">Let AI agents find and interact with your business</p>
+          </div>
 
           <Tabs defaultValue="submit" className="w-full">
             <TabsList className="grid w-full grid-cols-2 bg-zinc-900">
@@ -343,6 +339,121 @@ export default function Home() {
               </Card>
             </TabsContent>
           </Tabs>
+        </div>
+      </section>
+
+      {/* For Providers */}
+      <section className="py-16 px-4 border-t border-zinc-800">
+        <div className="max-w-3xl mx-auto">
+          <div className="text-center mb-8">
+            <p className="text-teal-400 text-sm font-medium mb-2">For Providers</p>
+            <h2 className="text-2xl font-bold">Your clients, AI-ready</h2>
+            <p className="text-zinc-400 mt-2">Import your clients and AI will know to use your connector</p>
+          </div>
+
+          <Card className="bg-zinc-900 border-zinc-800">
+            <CardContent className="p-8">
+              <div className="grid md:grid-cols-3 gap-6 mb-8">
+                <div className="text-center">
+                  <div className="w-12 h-12 bg-zinc-800 rounded-xl flex items-center justify-center mx-auto mb-3">
+                    <span className="text-2xl">📤</span>
+                  </div>
+                  <h3 className="font-medium text-white mb-1">Import</h3>
+                  <p className="text-zinc-500 text-sm">Upload your client list via CSV or API</p>
+                </div>
+                <div className="text-center">
+                  <div className="w-12 h-12 bg-zinc-800 rounded-xl flex items-center justify-center mx-auto mb-3">
+                    <span className="text-2xl">🔗</span>
+                  </div>
+                  <h3 className="font-medium text-white mb-1">Connect</h3>
+                  <p className="text-zinc-500 text-sm">Link them to your MCP endpoint</p>
+                </div>
+                <div className="text-center">
+                  <div className="w-12 h-12 bg-zinc-800 rounded-xl flex items-center justify-center mx-auto mb-3">
+                    <span className="text-2xl">🤖</span>
+                  </div>
+                  <h3 className="font-medium text-white mb-1">Discover</h3>
+                  <p className="text-zinc-500 text-sm">AI agents find your connector automatically</p>
+                </div>
+              </div>
+
+              <div className="text-center">
+                <Link href="/providers">
+                  <Button className="bg-teal-600 hover:bg-teal-500 cursor-pointer">
+                    Register as a Provider
+                  </Button>
+                </Link>
+              </div>
+            </CardContent>
+          </Card>
+        </div>
+      </section>
+
+      {/* FAQ */}
+      <section className="py-16 px-4 border-t border-zinc-800">
+        <div className="max-w-3xl mx-auto">
+          <h2 className="text-2xl font-bold text-center mb-8">Frequently Asked Questions</h2>
+
+          <div className="space-y-4">
+            <details className="group bg-zinc-900 border border-zinc-800 rounded-lg">
+              <summary className="flex items-center justify-between p-4 cursor-pointer text-white font-medium">
+                What is Dock AI?
+                <span className="text-zinc-500 group-open:rotate-180 transition-transform">▼</span>
+              </summary>
+              <div className="px-4 pb-4 text-zinc-400 text-sm">
+                Dock AI is a registry that helps AI agents discover which connectors (apps) can interact with any business.
+                Think of it as a phone book for AI — when someone asks their AI to &quot;book a table at Restaurant X&quot;,
+                Dock AI tells the AI which booking service handles that restaurant.
+              </div>
+            </details>
+
+            <details className="group bg-zinc-900 border border-zinc-800 rounded-lg">
+              <summary className="flex items-center justify-between p-4 cursor-pointer text-white font-medium">
+                What is an MCP connector?
+                <span className="text-zinc-500 group-open:rotate-180 transition-transform">▼</span>
+              </summary>
+              <div className="px-4 pb-4 text-zinc-400 text-sm">
+                MCP (Model Context Protocol) is a standard that allows AI agents to interact with external services.
+                A connector is an app that implements this protocol — like a booking system, a payment processor, or any service
+                that AI can use on behalf of users. ChatGPT calls them &quot;Apps&quot;, Claude calls them &quot;Connectors&quot;.
+              </div>
+            </details>
+
+            <details className="group bg-zinc-900 border border-zinc-800 rounded-lg">
+              <summary className="flex items-center justify-between p-4 cursor-pointer text-white font-medium">
+                How do I make my business discoverable by AI?
+                <span className="text-zinc-500 group-open:rotate-180 transition-transform">▼</span>
+              </summary>
+              <div className="px-4 pb-4 text-zinc-400 text-sm">
+                You have two options: (1) Add an Entity Card to your website at <code className="text-teal-400">/.well-known/entity-card.json</code>
+                and submit your domain, or (2) Ask your booking/management provider (like TheFork, Treatwell, etc.) to register you on Dock AI.
+                Once registered, AI agents can discover which service handles your business.
+              </div>
+            </details>
+
+            <details className="group bg-zinc-900 border border-zinc-800 rounded-lg">
+              <summary className="flex items-center justify-between p-4 cursor-pointer text-white font-medium">
+                I&apos;m a provider (booking system, SaaS). How do I register my clients?
+                <span className="text-zinc-500 group-open:rotate-180 transition-transform">▼</span>
+              </summary>
+              <div className="px-4 pb-4 text-zinc-400 text-sm">
+                Create an account on our <Link href="/providers" className="text-teal-400 hover:underline">provider portal</Link>,
+                verify your domain, then import your client list via CSV or API. Once imported, AI agents will know to use your
+                connector when users want to interact with any of your clients.
+              </div>
+            </details>
+
+            <details className="group bg-zinc-900 border border-zinc-800 rounded-lg">
+              <summary className="flex items-center justify-between p-4 cursor-pointer text-white font-medium">
+                Is Dock AI free?
+                <span className="text-zinc-500 group-open:rotate-180 transition-transform">▼</span>
+              </summary>
+              <div className="px-4 pb-4 text-zinc-400 text-sm">
+                Yes, Dock AI is free for businesses to register and for AI agents to query.
+                For providers with large client lists, we offer premium features like priority support and advanced analytics.
+              </div>
+            </details>
+          </div>
         </div>
       </section>
 
