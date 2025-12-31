@@ -126,12 +126,10 @@ export default function Home() {
       if (!res.ok) {
         setSubmitResult({ success: false, message: data.error || 'Failed to submit' })
       } else {
-        const entity = data.entities?.[0] || data.entity
+        const count = data.entities?.length || 1
         setSubmitResult({
           success: true,
-          message: entity
-            ? `Indexed! Verification Level: ${entity.verification_level}`
-            : 'Domain indexed successfully!',
+          message: count > 1 ? `${count} entities indexed!` : 'Domain indexed!',
         })
       }
     } catch {
