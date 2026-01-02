@@ -67,8 +67,10 @@ export default function Home() {
   // Animated business type
   const [businessIndex, setBusinessIndex] = useState(0)
   const [isAnimating, setIsAnimating] = useState(false)
+  const [mounted, setMounted] = useState(false)
 
   useEffect(() => {
+    setMounted(true)
     const interval = setInterval(() => {
       setIsAnimating(true)
       setTimeout(() => {
@@ -174,8 +176,9 @@ export default function Home() {
             <br />
             <span
               className={`text-teal-400 inline-block transition-all duration-200 ${
-                isAnimating ? 'opacity-0 translate-y-2' : 'opacity-100 translate-y-0'
+                mounted && isAnimating ? 'opacity-0 translate-y-2' : 'opacity-100 translate-y-0'
               }`}
+              suppressHydrationWarning
             >
               {businessTypes[businessIndex]}
             </span>
