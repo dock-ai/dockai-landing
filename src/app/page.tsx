@@ -56,6 +56,7 @@ const businessTypes = [
   'dentist',
   'barbershop',
   'yoga studio',
+  'shopify store',
 ]
 
 export default function Home() {
