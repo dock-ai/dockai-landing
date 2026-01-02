@@ -442,8 +442,8 @@ export default function Home() {
                 <span className="text-zinc-500 group-open:rotate-180 transition-transform">▼</span>
               </summary>
               <div className="px-4 pb-4 text-zinc-400 text-sm">
-                Create an account on our <a href="https://provider.dockai.co" className="text-teal-400 hover:underline">provider portal</a>,
-                verify your domain, then import your client list via CSV or API. Once imported, AI agents will know to use your
+                Check out our <a href="/providers" className="text-teal-400 hover:underline">provider page</a> to learn how to register your clients.
+                You can import your client list via CSV or API. Once imported, AI agents will know to use your
                 connector when users want to interact with any of your clients.
               </div>
             </details>
