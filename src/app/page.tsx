@@ -255,15 +255,15 @@ export default function Home() {
                           ))}
                         </div>
                       )}
-                      {/* Pending Providers for this entity */}
+                      {/* Detected Providers (no public MCP yet) */}
                       {entity.pending_providers && entity.pending_providers.length > 0 && (
                         <div className="space-y-2">
                           {entity.pending_providers.map((pp, i) => (
                             <div key={i} className="p-3 bg-zinc-950 rounded border border-dashed border-zinc-700">
                               <div className="flex items-center justify-between">
                                 <span className="text-zinc-400 font-mono text-sm">{pp.provider}</span>
-                                <Badge className="bg-amber-600/20 text-amber-400 border border-amber-600/30">
-                                  Pending
+                                <Badge className="bg-zinc-700/50 text-zinc-400 border border-zinc-600/30">
+                                  Detected
                                 </Badge>
                               </div>
                               <p className="text-zinc-600 text-xs mt-1 font-mono">{pp.provider_domain}</p>
@@ -276,6 +276,9 @@ export default function Home() {
                                   ))}
                                 </div>
                               )}
+                              <p className="text-zinc-500 text-xs mt-2 italic">
+                                This provider serves this business but hasn&apos;t published an MCP connector yet.
+                              </p>
                             </div>
                           ))}
                         </div>
