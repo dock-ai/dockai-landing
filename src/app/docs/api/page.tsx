@@ -95,7 +95,6 @@ export default function ApiReferencePage() {
         "country": "FR",
         "coordinates": { "lat": 48.8566, "lng": 2.3522 }
       },
-      "verification_level": 2,
       "mcps": [
         {
           "provider": "sevenrooms",
@@ -202,8 +201,7 @@ Content-Type: application/json
   "domain": "example-restaurant.com",
   "entity": {
     "id": "uuid",
-    "name": "Example Restaurant",
-    "verification_level": 1
+    "name": "Example Restaurant"
   },
   "mcps_count": 2
 }
@@ -214,8 +212,7 @@ Content-Type: application/json
   "domain": "example-restaurant.com",
   "entity": {
     "id": "uuid",
-    "name": "Example Restaurant",
-    "verification_level": 2
+    "name": "Example Restaurant"
   },
   "mcps_count": 2,
   "message": "Entity already indexed, updated"
