@@ -395,6 +395,17 @@ export default function Home() {
               </Card>
             </TabsContent>
           </Tabs>
+
+          {/* Shopify CTA */}
+          <Link
+            href="/shopify"
+            className="mt-6 flex items-center justify-center gap-3 p-4 bg-zinc-900/50 border border-zinc-800 rounded-lg hover:border-zinc-700 transition-colors group"
+          >
+            <Image src="/images/shopify_logo_darkbg.svg" alt="Shopify" width={80} height={24} className="opacity-70 group-hover:opacity-100 transition-opacity" />
+            <span className="text-zinc-500 group-hover:text-zinc-300 text-sm transition-colors">
+              Using Shopify? Get indexed automatically →
+            </span>
+          </Link>
         </div>
       </section>
 
