@@ -3,7 +3,7 @@
 import { useState } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
-import { Store, Check, AlertCircle, Loader2, ShoppingBag, Search, ShoppingCart, FileText } from 'lucide-react'
+import { Check, AlertCircle, Loader2, Search, ShoppingCart, FileText } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 
@@ -86,13 +86,12 @@ export default function ShopifyPage() {
         <div className="max-w-2xl mx-auto">
           {/* Hero */}
           <div className="text-center mb-12">
-            <div className="inline-flex items-center gap-3 mb-6">
-              <div className="w-12 h-12 rounded-xl bg-[#96bf48]/10 border border-[#96bf48]/20 flex items-center justify-center">
-                <Store className="w-6 h-6 text-[#96bf48]" />
-              </div>
+            <div className="inline-flex items-center gap-4 mb-6">
+              <Image src="/images/shopify_logo_darkbg.svg" alt="Shopify" width={120} height={36} />
               <span className="text-zinc-500 text-2xl">+</span>
-              <div className="w-12 h-12 rounded-xl bg-teal-500/10 border border-teal-500/20 flex items-center justify-center">
-                <Image src="/icon.svg" alt="Dock AI" width={24} height={24} />
+              <div className="flex items-center gap-2">
+                <Image src="/icon.svg" alt="Dock AI" width={32} height={32} />
+                <span className="text-white text-xl font-semibold">Dock AI</span>
               </div>
             </div>
             <h1 className="text-4xl font-bold text-white mb-4">
@@ -178,17 +177,6 @@ export default function ShopifyPage() {
                 </div>
               ))}
             </div>
-          </div>
-
-          {/* Stats */}
-          <div className="bg-zinc-900/50 border border-zinc-800 rounded-xl p-6 text-center">
-            <div className="flex items-center justify-center gap-2 mb-2">
-              <ShoppingBag className="w-5 h-5 text-[#96bf48]" />
-              <span className="text-2xl font-bold text-white">50,000+</span>
-            </div>
-            <p className="text-zinc-400 text-sm">
-              Shopify stores already indexed in Dock AI
-            </p>
           </div>
 
           {/* How it works */}
