@@ -86,12 +86,12 @@ export default function ShopifyPage() {
         <div className="max-w-2xl mx-auto">
           {/* Hero */}
           <div className="text-center mb-12">
-            <div className="inline-flex items-center gap-4 mb-6">
-              <Image src="/images/shopify_logo_darkbg.svg" alt="Shopify" width={120} height={36} />
-              <span className="text-zinc-500 text-2xl">+</span>
-              <div className="flex items-center gap-2">
-                <Image src="/icon.svg" alt="Dock AI" width={32} height={32} />
-                <span className="text-white text-xl font-semibold">Dock AI</span>
+            <div className="inline-flex items-center gap-6 mb-8">
+              <Image src="/images/shopify_logo_darkbg.svg" alt="Shopify" width={180} height={54} />
+              <span className="text-zinc-500 text-3xl">+</span>
+              <div className="flex items-center gap-3">
+                <Image src="/icon.svg" alt="Dock AI" width={48} height={48} />
+                <span className="text-white text-2xl font-semibold">Dock AI</span>
               </div>
             </div>
             <h1 className="text-4xl font-bold text-white mb-4">
