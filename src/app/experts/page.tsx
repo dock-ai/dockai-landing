@@ -170,9 +170,9 @@ function ProjectInquirySection() {
     <section className="py-16 px-4 border-t border-zinc-800">
       <div className="max-w-xl mx-auto">
         <div className="text-center mb-8">
-          <h2 className="text-2xl font-bold mb-2">Need a custom MCP?</h2>
+          <h2 className="text-2xl font-bold mb-2">Need Custom MCP Development?</h2>
           <p className="text-zinc-400">
-            Tell us about your project and we&apos;ll match you with the right expert.
+            Tell us about your project and we&apos;ll match you with the right MCP developer or agency.
           </p>
         </div>
 
@@ -250,18 +250,18 @@ export default function ExpertsPage() {
       <section className="py-16 px-4 border-b border-zinc-800">
         <div className="max-w-3xl mx-auto text-center">
           <Badge className="mb-4 bg-teal-600/20 text-teal-400 border-teal-600/30">
-            Dock AI Experts
+            MCP Development Experts
           </Badge>
           <h1 className="text-4xl font-bold mb-4">
-            Find an expert to build your MCP
+            Hire MCP Developers & Agencies
           </h1>
           <p className="text-xl text-zinc-400 mb-8">
-            Certified professionals who can build custom MCP connectors for your business or platform.
+            Find certified MCP builders, freelancers, and agencies to develop custom Model Context Protocol connectors for your business.
           </p>
           <div className="flex justify-center gap-4">
             <a href="#experts">
               <Button className="bg-teal-600 hover:bg-teal-500">
-                Browse Experts
+                Browse MCP Experts
               </Button>
             </a>
             <Link href="/experts/apply">
@@ -276,26 +276,27 @@ export default function ExpertsPage() {
       {/* What Experts Do */}
       <section className="py-12 px-4 border-b border-zinc-800">
         <div className="max-w-4xl mx-auto">
+          <h2 className="text-2xl font-bold text-center mb-8">MCP Development Services</h2>
           <div className="grid md:grid-cols-3 gap-6">
             <div className="text-center p-6">
               <div className="w-12 h-12 bg-zinc-800 rounded-xl flex items-center justify-center mx-auto mb-3">
                 <ShoppingCart className="w-6 h-6 text-teal-400" />
               </div>
-              <h3 className="font-medium text-white mb-2">E-commerce MCPs</h3>
-              <p className="text-zinc-500 text-sm">Shopify, WooCommerce, custom storefronts</p>
+              <h3 className="font-medium text-white mb-2">E-commerce MCP Development</h3>
+              <p className="text-zinc-500 text-sm">Shopify MCP, WooCommerce, custom storefronts</p>
             </div>
             <div className="text-center p-6">
               <div className="w-12 h-12 bg-zinc-800 rounded-xl flex items-center justify-center mx-auto mb-3">
                 <Calendar className="w-6 h-6 text-teal-400" />
               </div>
-              <h3 className="font-medium text-white mb-2">Booking MCPs</h3>
+              <h3 className="font-medium text-white mb-2">Booking System MCPs</h3>
               <p className="text-zinc-500 text-sm">Restaurants, salons, clinics, hotels</p>
             </div>
             <div className="text-center p-6">
               <div className="w-12 h-12 bg-zinc-800 rounded-xl flex items-center justify-center mx-auto mb-3">
                 <Zap className="w-6 h-6 text-teal-400" />
               </div>
-              <h3 className="font-medium text-white mb-2">Custom MCPs</h3>
+              <h3 className="font-medium text-white mb-2">Custom MCP Integrations</h3>
               <p className="text-zinc-500 text-sm">Internal tools, SaaS platforms, APIs</p>
             </div>
           </div>
@@ -305,7 +306,7 @@ export default function ExpertsPage() {
       {/* Experts List */}
       <section id="experts" className="py-16 px-4">
         <div className="max-w-4xl mx-auto">
-          <h2 className="text-2xl font-bold mb-8">Certified Experts</h2>
+          <h2 className="text-2xl font-bold mb-8">Certified MCP Developers & Agencies</h2>
 
           <div className="grid md:grid-cols-2 gap-6">
             {EXPERTS.map((expert) => (
