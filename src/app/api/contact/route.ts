@@ -10,14 +10,57 @@ function getResend() {
   return resend
 }
 
+function buildEmailContent(type: string, data: Record<string, string>) {
+  switch (type) {
+    case 'expert-application':
+      return {
+        subject: `[Dock AI] Expert Application: ${data.company || data.name}`,
+        html: `
+          <h2>New Expert Application</h2>
+          <p><strong>Name:</strong> ${data.name}</p>
+          <p><strong>Company:</strong> ${data.company}</p>
+          <p><strong>Email:</strong> ${data.email}</p>
+          ${data.website ? `<p><strong>Website:</strong> ${data.website}</p>` : ''}
+          <p><strong>Experience:</strong></p>
+          <p>${(data.experience || '').replace(/\n/g, '<br>')}</p>
+        `,
+      }
+    case 'project-inquiry':
+      return {
+        subject: `[Dock AI] Project Inquiry: ${data.company || data.name}`,
+        html: `
+          <h2>New Project Inquiry</h2>
+          <p><strong>Name:</strong> ${data.name}</p>
+          ${data.company ? `<p><strong>Company:</strong> ${data.company}</p>` : ''}
+          <p><strong>Email:</strong> ${data.email}</p>
+          <p><strong>Project Description:</strong></p>
+          <p>${(data.description || '').replace(/\n/g, '<br>')}</p>
+        `,
+      }
+    default:
+      return {
+        subject: `[Dock AI] Provider Contact: ${data.company || data.name}`,
+        html: `
+          <h2>New Provider Contact</h2>
+          <p><strong>Name:</strong> ${data.name}</p>
+          <p><strong>Email:</strong> ${data.email}</p>
+          ${data.company ? `<p><strong>Company:</strong> ${data.company}</p>` : ''}
+          ${data.mcpEndpoint ? `<p><strong>MCP Endpoint:</strong> ${data.mcpEndpoint}</p>` : ''}
+          <p><strong>Message:</strong></p>
+          <p>${(data.message || '').replace(/\n/g, '<br>')}</p>
+        `,
+      }
+  }
+}
+
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json()
-    const { name, email, company, mcpEndpoint, message } = body
+    const { type, name, email, ...rest } = body
 
-    if (!name || !email || !message) {
+    if (!name || !email) {
       return NextResponse.json(
-        { error: 'Name, email and message are required' },
+        { error: 'Name and email are required' },
         { status: 400 }
       )
     }
@@ -31,20 +74,14 @@ export async function POST(request: NextRequest) {
       )
     }
 
+    const { subject, html } = buildEmailContent(type, { name, email, ...rest })
+
     const { error } = await resendClient.emails.send({
       from: 'Dock AI <noreply@dockai.co>',
       to: ['yoann@dockai.co'],
       replyTo: email,
-      subject: `[Dock AI] Provider Contact: ${company || name}`,
-      html: `
-        <h2>New Provider Contact</h2>
-        <p><strong>Name:</strong> ${name}</p>
-        <p><strong>Email:</strong> ${email}</p>
-        ${company ? `<p><strong>Company:</strong> ${company}</p>` : ''}
-        ${mcpEndpoint ? `<p><strong>MCP Endpoint:</strong> ${mcpEndpoint}</p>` : ''}
-        <p><strong>Message:</strong></p>
-        <p>${message.replace(/\n/g, '<br>')}</p>
-      `,
+      subject,
+      html,
     })
 
     if (error) {

@@ -1,11 +1,13 @@
 'use client'
 
+import { useState } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
-import { ExternalLink, Mail, Star, BadgeCheck } from 'lucide-react'
+import { ExternalLink, Mail, Star, BadgeCheck, ShoppingCart, Calendar, Zap, Rocket, Send, CheckCircle } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
+import { Input } from '@/components/ui/input'
 
 interface Expert {
   name: string
@@ -110,6 +112,134 @@ function ExpertCard({ expert }: { expert: Expert }) {
   )
 }
 
+function ProjectInquirySection() {
+  const [submitted, setSubmitted] = useState(false)
+  const [loading, setLoading] = useState(false)
+  const [error, setError] = useState<string | null>(null)
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    setLoading(true)
+    setError(null)
+
+    const formData = new FormData(e.currentTarget)
+    const data = {
+      type: 'project-inquiry',
+      name: formData.get('name') as string,
+      email: formData.get('email') as string,
+      company: formData.get('company') as string,
+      description: formData.get('description') as string,
+    }
+
+    try {
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data),
+      })
+
+      if (!res.ok) {
+        const result = await res.json()
+        throw new Error(result.error || 'Failed to submit')
+      }
+
+      setSubmitted(true)
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Failed to submit')
+    }
+
+    setLoading(false)
+  }
+
+  if (submitted) {
+    return (
+      <section className="py-16 px-4 border-t border-zinc-800">
+        <div className="max-w-xl mx-auto text-center">
+          <CheckCircle className="w-12 h-12 text-teal-400 mx-auto mb-4" />
+          <h2 className="text-2xl font-bold mb-2">Project Submitted!</h2>
+          <p className="text-zinc-400">
+            We&apos;ll review your project and get back to you shortly.
+          </p>
+        </div>
+      </section>
+    )
+  }
+
+  return (
+    <section className="py-16 px-4 border-t border-zinc-800">
+      <div className="max-w-xl mx-auto">
+        <div className="text-center mb-8">
+          <h2 className="text-2xl font-bold mb-2">Need a custom MCP?</h2>
+          <p className="text-zinc-400">
+            Tell us about your project and we&apos;ll match you with the right expert.
+          </p>
+        </div>
+
+        <Card className="bg-zinc-900 border-zinc-800">
+          <CardContent className="p-6">
+            <form onSubmit={handleSubmit} className="space-y-4">
+              <div className="grid grid-cols-2 gap-4">
+                <div>
+                  <label className="block text-sm text-zinc-400 mb-1.5">Your Name *</label>
+                  <Input
+                    name="name"
+                    required
+                    placeholder="John Doe"
+                    className="bg-zinc-950 border-zinc-700 text-white"
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm text-zinc-400 mb-1.5">Company</label>
+                  <Input
+                    name="company"
+                    placeholder="Acme Inc"
+                    className="bg-zinc-950 border-zinc-700 text-white"
+                  />
+                </div>
+              </div>
+              <div>
+                <label className="block text-sm text-zinc-400 mb-1.5">Email *</label>
+                <Input
+                  name="email"
+                  type="email"
+                  required
+                  placeholder="you@example.com"
+                  className="bg-zinc-950 border-zinc-700 text-white"
+                />
+              </div>
+              <div>
+                <label className="block text-sm text-zinc-400 mb-1.5">Project Description *</label>
+                <textarea
+                  name="description"
+                  required
+                  rows={4}
+                  placeholder="What kind of MCP do you need? What business/platform should it connect to?"
+                  className="w-full px-3 py-2 bg-zinc-950 border border-zinc-700 rounded-md text-white placeholder:text-zinc-500 focus:outline-none focus:ring-2 focus:ring-teal-500/20 focus:border-zinc-600"
+                />
+              </div>
+              {error && (
+                <p className="text-red-400 text-sm">{error}</p>
+              )}
+              <Button
+                type="submit"
+                disabled={loading}
+                className="w-full bg-teal-600 hover:bg-teal-500"
+              >
+                {loading ? 'Submitting...' : (
+                  <>
+                    <Send className="w-4 h-4 mr-2" />
+                    Submit Project
+                  </>
+                )}
+              </Button>
+            </form>
+          </CardContent>
+        </Card>
+      </div>
+    </section>
+  )
+}
+
 export default function ExpertsPage() {
   return (
     <div className="min-h-screen flex flex-col">
@@ -167,21 +297,21 @@ export default function ExpertsPage() {
           <div className="grid md:grid-cols-3 gap-6">
             <div className="text-center p-6">
               <div className="w-12 h-12 bg-zinc-800 rounded-xl flex items-center justify-center mx-auto mb-3">
-                <span className="text-2xl">🛒</span>
+                <ShoppingCart className="w-6 h-6 text-teal-400" />
               </div>
               <h3 className="font-medium text-white mb-2">E-commerce MCPs</h3>
               <p className="text-zinc-500 text-sm">Shopify, WooCommerce, custom storefronts</p>
             </div>
             <div className="text-center p-6">
               <div className="w-12 h-12 bg-zinc-800 rounded-xl flex items-center justify-center mx-auto mb-3">
-                <span className="text-2xl">📅</span>
+                <Calendar className="w-6 h-6 text-teal-400" />
               </div>
               <h3 className="font-medium text-white mb-2">Booking MCPs</h3>
               <p className="text-zinc-500 text-sm">Restaurants, salons, clinics, hotels</p>
             </div>
             <div className="text-center p-6">
               <div className="w-12 h-12 bg-zinc-800 rounded-xl flex items-center justify-center mx-auto mb-3">
-                <span className="text-2xl">⚡</span>
+                <Zap className="w-6 h-6 text-teal-400" />
               </div>
               <h3 className="font-medium text-white mb-2">Custom MCPs</h3>
               <p className="text-zinc-500 text-sm">Internal tools, SaaS platforms, APIs</p>
@@ -204,7 +334,7 @@ export default function ExpertsPage() {
           {EXPERTS.length === 0 && (
             <div className="text-center p-12 border border-dashed border-zinc-700 rounded-lg">
               <div className="w-16 h-16 bg-zinc-800 rounded-xl flex items-center justify-center mx-auto mb-4">
-                <span className="text-3xl">🚀</span>
+                <Rocket className="w-8 h-8 text-teal-400" />
               </div>
               <h3 className="text-xl font-semibold mb-2">Be the first Expert</h3>
               <p className="text-zinc-400 mb-6">
@@ -234,20 +364,7 @@ export default function ExpertsPage() {
       </section>
 
       {/* CTA */}
-      <section className="py-16 px-4 border-t border-zinc-800">
-        <div className="max-w-xl mx-auto text-center">
-          <h2 className="text-2xl font-bold mb-4">Need a custom MCP?</h2>
-          <p className="text-zinc-400 mb-6">
-            Tell us about your project and we&apos;ll match you with the right expert.
-          </p>
-          <a href="mailto:experts@dockai.co?subject=MCP Project Inquiry">
-            <Button className="bg-teal-600 hover:bg-teal-500">
-              <Mail className="w-4 h-4 mr-2" />
-              Submit Your Project
-            </Button>
-          </a>
-        </div>
-      </section>
+      <ProjectInquirySection />
 
       {/* Footer */}
       <footer className="mt-auto py-8 px-4 border-t border-zinc-800">

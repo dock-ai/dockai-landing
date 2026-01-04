@@ -13,27 +13,38 @@ export default function ApplyExpertPage() {
   const [submitted, setSubmitted] = useState(false)
   const [loading, setLoading] = useState(false)
 
+  const [error, setError] = useState<string | null>(null)
+
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     setLoading(true)
+    setError(null)
 
     const formData = new FormData(e.currentTarget)
     const data = {
-      name: formData.get('name'),
-      company: formData.get('company'),
-      email: formData.get('email'),
-      website: formData.get('website'),
-      experience: formData.get('experience'),
+      type: 'expert-application',
+      name: formData.get('name') as string,
+      company: formData.get('company') as string,
+      email: formData.get('email') as string,
+      website: formData.get('website') as string,
+      experience: formData.get('experience') as string,
     }
 
-    // For now, just send an email - can integrate with a proper form handler later
     try {
-      // Simple mailto fallback
-      window.location.href = `mailto:experts@dockai.co?subject=Expert Application: ${data.company}&body=Name: ${data.name}%0D%0ACompany: ${data.company}%0D%0AEmail: ${data.email}%0D%0AWebsite: ${data.website}%0D%0A%0D%0AExperience:%0D%0A${data.experience}`
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data),
+      })
+
+      if (!res.ok) {
+        const result = await res.json()
+        throw new Error(result.error || 'Failed to submit')
+      }
+
       setSubmitted(true)
-    } catch {
-      // Fallback
-      setSubmitted(true)
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Failed to submit application')
     }
 
     setLoading(false)
@@ -166,6 +177,9 @@ export default function ApplyExpertPage() {
                         className="w-full px-3 py-2 bg-zinc-950 border border-zinc-700 rounded-md text-white placeholder:text-zinc-500 focus:outline-none focus:ring-2 focus:ring-teal-500/20 focus:border-zinc-600"
                       />
                     </div>
+                    {error && (
+                      <p className="text-red-400 text-sm">{error}</p>
+                    )}
                     <Button
                       type="submit"
                       disabled={loading}
