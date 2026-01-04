@@ -21,18 +21,7 @@ interface Expert {
 }
 
 const EXPERTS: Expert[] = [
-  {
-    name: 'Dock AI Studio',
-    slug: 'dock-ai-studio',
-    description: 'The team behind Dock AI. We build custom MCP connectors for providers and businesses.',
-    specialties: ['Shopify MCP', 'Booking Systems', 'Custom Integrations'],
-    industries: ['E-commerce', 'Restaurants', 'Hospitality'],
-    website: 'https://dockai.co',
-    email: 'experts@dockai.co',
-    featured: true,
-    projects: 12,
-  },
-  // Add more experts here as they join
+  // Add experts here as they join
 ]
 
 function ExpertCard({ expert }: { expert: Expert }) {
@@ -212,7 +201,24 @@ export default function ExpertsPage() {
             ))}
           </div>
 
-          {EXPERTS.length === 1 && (
+          {EXPERTS.length === 0 && (
+            <div className="text-center p-12 border border-dashed border-zinc-700 rounded-lg">
+              <div className="w-16 h-16 bg-zinc-800 rounded-xl flex items-center justify-center mx-auto mb-4">
+                <span className="text-3xl">🚀</span>
+              </div>
+              <h3 className="text-xl font-semibold mb-2">Be the first Expert</h3>
+              <p className="text-zinc-400 mb-6">
+                We&apos;re building our network of certified MCP builders. Join now and get early visibility.
+              </p>
+              <Link href="/experts/apply">
+                <Button className="bg-teal-600 hover:bg-teal-500">
+                  Apply to become an Expert
+                </Button>
+              </Link>
+            </div>
+          )}
+
+          {EXPERTS.length > 0 && EXPERTS.length < 4 && (
             <div className="mt-12 text-center p-8 border border-dashed border-zinc-700 rounded-lg">
               <p className="text-zinc-400 mb-4">
                 More experts coming soon. Want to join?

@@ -153,6 +153,9 @@ export default function Home() {
             Dock AI
           </Link>
           <nav className="flex items-center gap-6">
+            <Link href="/install" className="text-sm text-zinc-400 hover:text-white cursor-pointer">
+              Install Connector
+            </Link>
             <Link href="/experts" className="text-sm text-zinc-400 hover:text-white cursor-pointer">
               Experts
             </Link>
