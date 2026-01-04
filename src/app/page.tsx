@@ -10,6 +10,7 @@ import { Card, CardContent } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { EntityCardGenerator } from '@/components/entity-card-generator'
+import { Header, Footer } from '@/components/layout'
 
 interface McpResult {
   provider: string
@@ -145,32 +146,7 @@ export default function Home() {
 
   return (
     <div className="min-h-screen flex flex-col">
-      {/* Header */}
-      <header className="border-b border-zinc-800">
-        <div className="max-w-5xl mx-auto px-4 py-4 flex items-center justify-between">
-          <Link href="/" className="flex items-center gap-2 text-xl font-semibold text-white">
-            <Image src="/icon.svg" alt="Dock AI" width={24} height={24} />
-            Dock AI
-          </Link>
-          <nav className="flex items-center gap-6">
-            <Link href="/install" className="text-sm text-zinc-400 hover:text-white cursor-pointer">
-              Install Connector
-            </Link>
-            <Link href="/experts" className="text-sm text-zinc-400 hover:text-white cursor-pointer">
-              Experts
-            </Link>
-            <Link href="/docs" className="text-sm text-zinc-400 hover:text-white cursor-pointer">
-              Docs
-            </Link>
-            <Link
-              href="/providers"
-              className="text-sm text-teal-400 hover:text-teal-300 cursor-pointer"
-            >
-              For Providers
-            </Link>
-          </nav>
-        </div>
-      </header>
+      <Header />
 
       {/* Hero */}
       <section className="py-20 px-4">
@@ -479,36 +455,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Footer */}
-      <footer className="mt-auto py-8 px-4 border-t border-zinc-800">
-        <div className="max-w-5xl mx-auto flex items-center justify-between text-sm text-zinc-500">
-          <p>Dock AI - First EDP Registry</p>
-          <div className="flex gap-4">
-            <Link href="/experts" className="hover:text-white">
-              Experts
-            </Link>
-            <Link href="/docs" className="hover:text-white">
-              Docs
-            </Link>
-            <a
-              href="https://github.com/edp-protocol/entity-discovery-protocol"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="hover:text-white"
-            >
-              Protocol
-            </a>
-            <a
-              href="https://github.com/dock-ai"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="hover:text-white"
-            >
-              GitHub
-            </a>
-          </div>
-        </div>
-      </footer>
+      <Footer />
     </div>
   )
 }

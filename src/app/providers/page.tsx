@@ -2,10 +2,10 @@
 
 import { useState } from 'react'
 import Link from 'next/link'
-import Image from 'next/image'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Card, CardContent } from '@/components/ui/card'
+import { Header, Footer } from '@/components/layout'
 
 export default function ProvidersPage() {
   const [formData, setFormData] = useState({
@@ -44,30 +44,8 @@ export default function ProvidersPage() {
   }
 
   return (
-    <div className="min-h-screen">
-      {/* Header */}
-      <header className="border-b border-zinc-800">
-        <div className="max-w-5xl mx-auto px-4 py-4 flex items-center justify-between">
-          <Link href="/" className="flex items-center gap-2 text-xl font-semibold text-white">
-            <Image src="/icon.svg" alt="Dock AI" width={24} height={24} />
-            Dock AI
-          </Link>
-          <nav className="flex items-center gap-6">
-            <Link href="/install" className="text-sm text-zinc-400 hover:text-white cursor-pointer">
-              Install Connector
-            </Link>
-            <Link href="/docs" className="text-sm text-zinc-400 hover:text-white cursor-pointer">
-              Docs
-            </Link>
-            <Link
-              href="/providers"
-              className="text-sm text-teal-400 hover:text-teal-300 cursor-pointer"
-            >
-              For Providers
-            </Link>
-          </nav>
-        </div>
-      </header>
+    <div className="min-h-screen flex flex-col">
+      <Header />
 
       {/* Content */}
       <section className="py-16 px-4">
@@ -170,6 +148,8 @@ export default function ProvidersPage() {
           </p>
         </div>
       </section>
+
+      <Footer />
     </div>
   )
 }

@@ -8,6 +8,7 @@ import { Button } from '@/components/ui/button'
 import { Card, CardContent } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 import { Input } from '@/components/ui/input'
+import { Header, Footer } from '@/components/layout'
 
 interface Expert {
   name: string
@@ -243,26 +244,7 @@ function ProjectInquirySection() {
 export default function ExpertsPage() {
   return (
     <div className="min-h-screen flex flex-col">
-      {/* Header */}
-      <header className="border-b border-zinc-800">
-        <div className="max-w-5xl mx-auto px-4 py-4 flex items-center justify-between">
-          <Link href="/" className="flex items-center gap-2 text-xl font-semibold text-white">
-            <Image src="/icon.svg" alt="Dock AI" width={24} height={24} />
-            Dock AI
-          </Link>
-          <nav className="flex items-center gap-6">
-            <Link href="/experts" className="text-sm text-teal-400">
-              Experts
-            </Link>
-            <Link href="/docs" className="text-sm text-zinc-400 hover:text-white">
-              Docs
-            </Link>
-            <Link href="/providers" className="text-sm text-zinc-400 hover:text-white">
-              For Providers
-            </Link>
-          </nav>
-        </div>
-      </header>
+      <Header />
 
       {/* Hero */}
       <section className="py-16 px-4 border-b border-zinc-800">
@@ -366,19 +348,7 @@ export default function ExpertsPage() {
       {/* CTA */}
       <ProjectInquirySection />
 
-      {/* Footer */}
-      <footer className="mt-auto py-8 px-4 border-t border-zinc-800">
-        <div className="max-w-5xl mx-auto flex items-center justify-between text-sm text-zinc-500">
-          <p>Dock AI - First EDP Registry</p>
-          <div className="flex gap-4">
-            <Link href="/docs" className="hover:text-white">Docs</Link>
-            <Link href="/experts" className="hover:text-white">Experts</Link>
-            <a href="https://github.com/dock-ai" target="_blank" rel="noopener noreferrer" className="hover:text-white">
-              GitHub
-            </a>
-          </div>
-        </div>
-      </footer>
+      <Footer />
     </div>
   )
 }

@@ -2,12 +2,12 @@
 
 import { useState } from 'react'
 import Link from 'next/link'
-import Image from 'next/image'
 import { CheckCircle, ArrowLeft } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Card, CardContent } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
+import { Header, Footer } from '@/components/layout'
 
 export default function ApplyExpertPage() {
   const [submitted, setSubmitted] = useState(false)
@@ -52,23 +52,7 @@ export default function ApplyExpertPage() {
 
   return (
     <div className="min-h-screen flex flex-col">
-      {/* Header */}
-      <header className="border-b border-zinc-800">
-        <div className="max-w-5xl mx-auto px-4 py-4 flex items-center justify-between">
-          <Link href="/" className="flex items-center gap-2 text-xl font-semibold text-white">
-            <Image src="/icon.svg" alt="Dock AI" width={24} height={24} />
-            Dock AI
-          </Link>
-          <nav className="flex items-center gap-6">
-            <Link href="/experts" className="text-sm text-zinc-400 hover:text-white">
-              Experts
-            </Link>
-            <Link href="/docs" className="text-sm text-zinc-400 hover:text-white">
-              Docs
-            </Link>
-          </nav>
-        </div>
-      </header>
+      <Header />
 
       {/* Content */}
       <main className="flex-1 py-16 px-4">
@@ -195,16 +179,7 @@ export default function ApplyExpertPage() {
         </div>
       </main>
 
-      {/* Footer */}
-      <footer className="py-8 px-4 border-t border-zinc-800">
-        <div className="max-w-5xl mx-auto flex items-center justify-between text-sm text-zinc-500">
-          <p>Dock AI - First EDP Registry</p>
-          <div className="flex gap-4">
-            <Link href="/experts" className="hover:text-white">Experts</Link>
-            <Link href="/docs" className="hover:text-white">Docs</Link>
-          </div>
-        </div>
-      </footer>
+      <Footer />
     </div>
   )
 }
