@@ -20,6 +20,7 @@ export const metadata: Metadata = {
   authors: [{ name: "Dock AI" }],
   icons: {
     icon: [
+      { url: '/favicon.ico', sizes: '32x32' },
       { url: '/icon.svg', type: 'image/svg+xml' },
     ],
     apple: '/icon.svg',
