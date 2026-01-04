@@ -18,6 +18,12 @@ export const metadata: Metadata = {
   description: "The first Entity Discovery Protocol registry. Dock AI helps AI agents discover which MCP servers can interact with any business - restaurants, salons, clinics, and more.",
   keywords: ["EDP registry", "entity discovery protocol", "MCP server", "Model Context Protocol", "AI agent", "MCP discovery", "business AI", "agentic AI"],
   authors: [{ name: "Dock AI" }],
+  icons: {
+    icon: [
+      { url: '/icon.svg', type: 'image/svg+xml' },
+    ],
+    apple: '/icon.svg',
+  },
   openGraph: {
     title: "Dock AI - AI can find you. Let it act.",
     description: "The first Entity Discovery Protocol registry. Discover which MCP servers can interact with any business.",

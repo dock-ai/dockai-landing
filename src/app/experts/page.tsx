@@ -1,0 +1,261 @@
+'use client'
+
+import Link from 'next/link'
+import Image from 'next/image'
+import { ExternalLink, Mail, Star, BadgeCheck } from 'lucide-react'
+import { Button } from '@/components/ui/button'
+import { Card, CardContent } from '@/components/ui/card'
+import { Badge } from '@/components/ui/badge'
+
+interface Expert {
+  name: string
+  slug: string
+  logo?: string
+  description: string
+  specialties: string[]
+  industries: string[]
+  website?: string
+  email?: string
+  featured?: boolean
+  projects?: number
+}
+
+const EXPERTS: Expert[] = [
+  {
+    name: 'Dock AI Studio',
+    slug: 'dock-ai-studio',
+    description: 'The team behind Dock AI. We build custom MCP connectors for providers and businesses.',
+    specialties: ['Shopify MCP', 'Booking Systems', 'Custom Integrations'],
+    industries: ['E-commerce', 'Restaurants', 'Hospitality'],
+    website: 'https://dockai.co',
+    email: 'experts@dockai.co',
+    featured: true,
+    projects: 12,
+  },
+  // Add more experts here as they join
+]
+
+function ExpertCard({ expert }: { expert: Expert }) {
+  return (
+    <Card className={`bg-zinc-900 border-zinc-800 ${expert.featured ? 'ring-1 ring-teal-500/50' : ''}`}>
+      <CardContent className="p-6">
+        <div className="flex items-start justify-between mb-4">
+          <div className="flex items-center gap-3">
+            {expert.logo ? (
+              <Image
+                src={expert.logo}
+                alt={expert.name}
+                width={48}
+                height={48}
+                className="rounded-lg"
+              />
+            ) : (
+              <div className="w-12 h-12 bg-zinc-800 rounded-lg flex items-center justify-center text-xl font-bold text-teal-400">
+                {expert.name.charAt(0)}
+              </div>
+            )}
+            <div>
+              <div className="flex items-center gap-2">
+                <h3 className="font-semibold text-white">{expert.name}</h3>
+                {expert.featured && (
+                  <BadgeCheck className="w-4 h-4 text-teal-400" />
+                )}
+              </div>
+              {expert.projects && (
+                <p className="text-xs text-zinc-500">{expert.projects} projects completed</p>
+              )}
+            </div>
+          </div>
+          {expert.featured && (
+            <Badge className="bg-teal-600/20 text-teal-400 border-teal-600/30">
+              <Star className="w-3 h-3 mr-1" />
+              Featured
+            </Badge>
+          )}
+        </div>
+
+        <p className="text-zinc-400 text-sm mb-4">{expert.description}</p>
+
+        <div className="space-y-3 mb-4">
+          <div>
+            <p className="text-xs text-zinc-500 mb-1.5">Specialties</p>
+            <div className="flex flex-wrap gap-1.5">
+              {expert.specialties.map((s) => (
+                <Badge key={s} variant="secondary" className="text-xs bg-zinc-800 text-zinc-300">
+                  {s}
+                </Badge>
+              ))}
+            </div>
+          </div>
+          <div>
+            <p className="text-xs text-zinc-500 mb-1.5">Industries</p>
+            <div className="flex flex-wrap gap-1.5">
+              {expert.industries.map((i) => (
+                <Badge key={i} variant="outline" className="text-xs border-zinc-700 text-zinc-400">
+                  {i}
+                </Badge>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        <div className="flex gap-2">
+          {expert.email && (
+            <a href={`mailto:${expert.email}?subject=MCP Project Inquiry`} className="flex-1">
+              <Button className="w-full bg-teal-600 hover:bg-teal-500">
+                <Mail className="w-4 h-4 mr-2" />
+                Contact
+              </Button>
+            </a>
+          )}
+          {expert.website && (
+            <a href={expert.website} target="_blank" rel="noopener noreferrer">
+              <Button variant="outline" className="border-zinc-700 hover:bg-zinc-800">
+                <ExternalLink className="w-4 h-4" />
+              </Button>
+            </a>
+          )}
+        </div>
+      </CardContent>
+    </Card>
+  )
+}
+
+export default function ExpertsPage() {
+  return (
+    <div className="min-h-screen flex flex-col">
+      {/* Header */}
+      <header className="border-b border-zinc-800">
+        <div className="max-w-5xl mx-auto px-4 py-4 flex items-center justify-between">
+          <Link href="/" className="flex items-center gap-2 text-xl font-semibold text-white">
+            <Image src="/icon.svg" alt="Dock AI" width={24} height={24} />
+            Dock AI
+          </Link>
+          <nav className="flex items-center gap-6">
+            <Link href="/experts" className="text-sm text-teal-400">
+              Experts
+            </Link>
+            <Link href="/docs" className="text-sm text-zinc-400 hover:text-white">
+              Docs
+            </Link>
+            <Link href="/providers" className="text-sm text-zinc-400 hover:text-white">
+              For Providers
+            </Link>
+          </nav>
+        </div>
+      </header>
+
+      {/* Hero */}
+      <section className="py-16 px-4 border-b border-zinc-800">
+        <div className="max-w-3xl mx-auto text-center">
+          <Badge className="mb-4 bg-teal-600/20 text-teal-400 border-teal-600/30">
+            Dock AI Experts
+          </Badge>
+          <h1 className="text-4xl font-bold mb-4">
+            Find an expert to build your MCP
+          </h1>
+          <p className="text-xl text-zinc-400 mb-8">
+            Certified professionals who can build custom MCP connectors for your business or platform.
+          </p>
+          <div className="flex justify-center gap-4">
+            <a href="#experts">
+              <Button className="bg-teal-600 hover:bg-teal-500">
+                Browse Experts
+              </Button>
+            </a>
+            <Link href="/experts/apply">
+              <Button variant="outline" className="border-zinc-700 hover:bg-zinc-800">
+                Become an Expert
+              </Button>
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* What Experts Do */}
+      <section className="py-12 px-4 border-b border-zinc-800">
+        <div className="max-w-4xl mx-auto">
+          <div className="grid md:grid-cols-3 gap-6">
+            <div className="text-center p-6">
+              <div className="w-12 h-12 bg-zinc-800 rounded-xl flex items-center justify-center mx-auto mb-3">
+                <span className="text-2xl">🛒</span>
+              </div>
+              <h3 className="font-medium text-white mb-2">E-commerce MCPs</h3>
+              <p className="text-zinc-500 text-sm">Shopify, WooCommerce, custom storefronts</p>
+            </div>
+            <div className="text-center p-6">
+              <div className="w-12 h-12 bg-zinc-800 rounded-xl flex items-center justify-center mx-auto mb-3">
+                <span className="text-2xl">📅</span>
+              </div>
+              <h3 className="font-medium text-white mb-2">Booking MCPs</h3>
+              <p className="text-zinc-500 text-sm">Restaurants, salons, clinics, hotels</p>
+            </div>
+            <div className="text-center p-6">
+              <div className="w-12 h-12 bg-zinc-800 rounded-xl flex items-center justify-center mx-auto mb-3">
+                <span className="text-2xl">⚡</span>
+              </div>
+              <h3 className="font-medium text-white mb-2">Custom MCPs</h3>
+              <p className="text-zinc-500 text-sm">Internal tools, SaaS platforms, APIs</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Experts List */}
+      <section id="experts" className="py-16 px-4">
+        <div className="max-w-4xl mx-auto">
+          <h2 className="text-2xl font-bold mb-8">Certified Experts</h2>
+
+          <div className="grid md:grid-cols-2 gap-6">
+            {EXPERTS.map((expert) => (
+              <ExpertCard key={expert.slug} expert={expert} />
+            ))}
+          </div>
+
+          {EXPERTS.length === 1 && (
+            <div className="mt-12 text-center p-8 border border-dashed border-zinc-700 rounded-lg">
+              <p className="text-zinc-400 mb-4">
+                More experts coming soon. Want to join?
+              </p>
+              <Link href="/experts/apply">
+                <Button variant="outline" className="border-zinc-700 hover:bg-zinc-800">
+                  Apply to become an Expert
+                </Button>
+              </Link>
+            </div>
+          )}
+        </div>
+      </section>
+
+      {/* CTA */}
+      <section className="py-16 px-4 border-t border-zinc-800">
+        <div className="max-w-xl mx-auto text-center">
+          <h2 className="text-2xl font-bold mb-4">Need a custom MCP?</h2>
+          <p className="text-zinc-400 mb-6">
+            Tell us about your project and we&apos;ll match you with the right expert.
+          </p>
+          <a href="mailto:experts@dockai.co?subject=MCP Project Inquiry">
+            <Button className="bg-teal-600 hover:bg-teal-500">
+              <Mail className="w-4 h-4 mr-2" />
+              Submit Your Project
+            </Button>
+          </a>
+        </div>
+      </section>
+
+      {/* Footer */}
+      <footer className="mt-auto py-8 px-4 border-t border-zinc-800">
+        <div className="max-w-5xl mx-auto flex items-center justify-between text-sm text-zinc-500">
+          <p>Dock AI - First EDP Registry</p>
+          <div className="flex gap-4">
+            <Link href="/docs" className="hover:text-white">Docs</Link>
+            <Link href="/experts" className="hover:text-white">Experts</Link>
+            <a href="https://github.com/dock-ai" target="_blank" rel="noopener noreferrer" className="hover:text-white">
+              GitHub
+            </a>
+          </div>
+        </div>
+      </footer>
+    </div>
+  )
+}

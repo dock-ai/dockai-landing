@@ -153,8 +153,8 @@ export default function Home() {
             Dock AI
           </Link>
           <nav className="flex items-center gap-6">
-            <Link href="/install" className="text-sm text-zinc-400 hover:text-white cursor-pointer">
-              Install Connector
+            <Link href="/experts" className="text-sm text-zinc-400 hover:text-white cursor-pointer">
+              Experts
             </Link>
             <Link href="/docs" className="text-sm text-zinc-400 hover:text-white cursor-pointer">
               Docs
@@ -481,6 +481,9 @@ export default function Home() {
         <div className="max-w-5xl mx-auto flex items-center justify-between text-sm text-zinc-500">
           <p>Dock AI - First EDP Registry</p>
           <div className="flex gap-4">
+            <Link href="/experts" className="hover:text-white">
+              Experts
+            </Link>
             <Link href="/docs" className="hover:text-white">
               Docs
             </Link>
