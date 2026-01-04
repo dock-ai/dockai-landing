@@ -98,7 +98,9 @@ export default function Home() {
     setResult(null)
 
     try {
-      const res = await fetch(`https://api.dockai.co/v1/resolve/domain/${encodeURIComponent(domain.trim())}`)
+      const res = await fetch(`https://api.dockai.co/v1/resolve/domain/${encodeURIComponent(domain.trim())}`, {
+        headers: { 'X-Source': 'landing' }
+      })
       const data = await res.json()
 
       if (!res.ok) {
