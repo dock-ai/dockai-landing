@@ -108,6 +108,95 @@ export default function McpPage() {
         to the user for installing the provider&apos;s MCP.
       </p>
 
+      <h2>Usage Examples</h2>
+
+      <p className="text-zinc-400 my-4">
+        Here are real-world examples of using Dock AI to discover MCP endpoints:
+      </p>
+
+      <h3>Example 1: Restaurant Booking</h3>
+      <p className="text-zinc-400 my-2">
+        User wants to book a table at a Parisian restaurant.
+      </p>
+      <CodeBlock className="my-4">{`// User: "Book a table at Septime Paris"
+
+// Step 1: AI searches web for restaurant domain
+// Found: septime-charonne.fr
+
+// Step 2: AI calls resolve_domain
+resolve_domain("septime-charonne.fr")
+
+// Step 3: Response
+{
+  "domain": "septime-charonne.fr",
+  "entities": [{
+    "name": "Septime",
+    "category": "restaurant",
+    "mcps": [{
+      "provider": "zenchef",
+      "endpoint": "https://mcp.zenchef.com",
+      "capabilities": ["reservations", "availability"]
+    }]
+  }]
+}
+
+// Step 4: AI guides user to add ZenChef MCP to complete booking`}</CodeBlock>
+
+      <h3>Example 2: E-commerce Shopping</h3>
+      <p className="text-zinc-400 my-2">
+        User wants to browse products on an online store.
+      </p>
+      <CodeBlock className="my-4">{`// User: "Show me running shoes on Gymshark"
+
+// AI calls resolve_domain
+resolve_domain("gymshark.com")
+
+// Response
+{
+  "domain": "gymshark.com",
+  "entities": [{
+    "name": "Gymshark",
+    "category": "ecommerce",
+    "mcps": [{
+      "provider": "shopify",
+      "endpoint": "https://mcp.shopify.com",
+      "capabilities": ["products", "cart", "checkout"]
+    }]
+  }]
+}
+
+// AI can now help user browse products via Shopify MCP`}</CodeBlock>
+
+      <h3>Example 3: Multi-location Business</h3>
+      <p className="text-zinc-400 my-2">
+        User wants to book at a restaurant group with multiple locations.
+      </p>
+      <CodeBlock className="my-4">{`// User: "Book at Gloria near me"
+
+// AI calls resolve_domain
+resolve_domain("gloria-osteria.com")
+
+// Response with multiple entities
+{
+  "domain": "gloria-osteria.com",
+  "entities": [
+    {
+      "name": "Gloria Paris",
+      "path": "/restaurants/paris",
+      "location": { "city": "Paris", "address": "186 Rue du Faubourg Poissonnière" },
+      "mcps": [{ "provider": "zenchef", "endpoint": "https://mcp.zenchef.com" }]
+    },
+    {
+      "name": "Gloria London",
+      "path": "/restaurants/london",
+      "location": { "city": "London", "address": "54-56 Great Eastern St" },
+      "mcps": [{ "provider": "zenchef", "endpoint": "https://mcp.zenchef.com" }]
+    }
+  ]
+}
+
+// AI asks user which location, then proceeds with booking`}</CodeBlock>
+
       <h2>Self-hosting</h2>
 
       <p className="text-zinc-400 my-4">
