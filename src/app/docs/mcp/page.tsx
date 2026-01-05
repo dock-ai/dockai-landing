@@ -209,6 +209,60 @@ uvx dock-ai-mcp
 # Or deploy to Vercel
 # See: https://github.com/dock-ai/mcp`}</CodeBlock>
 
+      <h2>Troubleshooting</h2>
+
+      <div className="space-y-4 my-4">
+        <div className="p-4 bg-zinc-900 border border-zinc-800 rounded-lg">
+          <h4 className="text-white font-medium mb-2">Domain not found</h4>
+          <p className="text-zinc-400 text-sm mb-2">
+            If <code>resolve_domain</code> returns &quot;Entity not found&quot;:
+          </p>
+          <ul className="text-zinc-400 text-sm list-disc list-inside space-y-1">
+            <li>Verify the domain is correct (without https:// or paths)</li>
+            <li>The business may not have an MCP provider yet</li>
+            <li>Try the main domain (e.g., &quot;brand.com&quot; instead of &quot;shop.brand.com&quot;)</li>
+          </ul>
+        </div>
+
+        <div className="p-4 bg-zinc-900 border border-zinc-800 rounded-lg">
+          <h4 className="text-white font-medium mb-2">Connection timeout</h4>
+          <p className="text-zinc-400 text-sm mb-2">
+            If the MCP server is not responding:
+          </p>
+          <ul className="text-zinc-400 text-sm list-disc list-inside space-y-1">
+            <li>Check your internet connection</li>
+            <li>The server URL is <code>https://mcp.dockai.co/mcp</code></li>
+            <li>Try again in a few seconds (temporary network issues)</li>
+          </ul>
+        </div>
+
+        <div className="p-4 bg-zinc-900 border border-zinc-800 rounded-lg">
+          <h4 className="text-white font-medium mb-2">MCP connector not working in Claude/ChatGPT</h4>
+          <p className="text-zinc-400 text-sm mb-2">
+            If the connector doesn&apos;t appear or work:
+          </p>
+          <ul className="text-zinc-400 text-sm list-disc list-inside space-y-1">
+            <li>Ensure you have a compatible plan (Claude Pro/Max, ChatGPT Plus/Pro)</li>
+            <li>Restart your AI assistant after adding the connector</li>
+            <li>Check that the URL is exactly: <code>https://mcp.dockai.co/mcp</code></li>
+          </ul>
+        </div>
+
+        <div className="p-4 bg-zinc-900 border border-zinc-800 rounded-lg">
+          <h4 className="text-white font-medium mb-2">Need help?</h4>
+          <p className="text-zinc-400 text-sm">
+            Contact us at{' '}
+            <a href="mailto:support@dockai.co" className="text-teal-400 hover:underline">
+              support@dockai.co
+            </a>{' '}
+            or open an issue on{' '}
+            <a href="https://github.com/dock-ai/mcp/issues" className="text-teal-400 hover:underline">
+              GitHub
+            </a>.
+          </p>
+        </div>
+      </div>
+
       <h2>Links</h2>
 
       <ul className="list-disc list-inside space-y-1 my-4 text-zinc-400">
