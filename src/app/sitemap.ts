@@ -1,9 +1,16 @@
 import { MetadataRoute } from 'next'
 
-// Fetch all domains from the registry API
+// Fetch all domains from the registry API (requires internal key)
 async function getAllDomains(): Promise<string[]> {
+  const internalKey = process.env.INTERNAL_API_KEY
+  if (!internalKey) {
+    console.warn('INTERNAL_API_KEY not set, sitemap will have no entity pages')
+    return []
+  }
+
   try {
     const res = await fetch('https://api.dockai.co/v1/domains', {
+      headers: { 'X-Internal-Key': internalKey },
       next: { revalidate: 86400 }, // Cache for 24 hours
     })
     if (!res.ok) return []
